@@ -16,23 +16,20 @@ def prime(n):
     return c
 
 
+def is_prime(n):
+    if n==1:
+        return False;
+
+    if n>2 and n % 2 ==0:
+        return False;
+
+    max_divisor = math.floor(math.sqrt(n))
+    for i in range(3, 1 + max_divisor, 2):
+        if n % i == 0:
+            return False;
+    return True;
+
+
 def main():
-    for i in range(20):
-        a = 0
-        if i == 0:
-            a = prime(i+1)
-            primes.append(a)
-        else:
-            a = prime(i)
-            primes.append(a)
-    clear()
-
-
-def clear():
-    for i in range(len(primes)-1):
-        if primes[i+1] == 2:
-            primes.remove(primes[i])
-
-
-main()
-print(primes)
+    for i in range(1,1000):
+        print(i, is_prime(i));
