@@ -1,22 +1,38 @@
+import math
+import csv
 
 # Euler Problems
-
-# Smallest Multiple
-
 # Producing a prime number
 
-#function is_prime(n)
-#     if n ≤ 3
- #       return n > 1
-#     else if n mod 2 = 0 or n mod 3 = 0
- #       return false
- #    let i ← 5
- #    while i * i ≤ n
-  #      if n mod i = 0 or n mod (i + 2) = 0
-  #          return false
-  #      i ← i + 6
-  #   return true
+num = 13195
+primes = []
+# f(n) = [(n! mod (n+1))/n](n-1)+2
 
-def factorial(n):
 
-    if (n=0):
+def prime(n):
+    a = math.factorial(n) % (n+1)
+    b = a / n
+    c = (b * (n-1)) + 2
+    return c
+
+
+def main():
+    for i in range(20):
+        a = 0
+        if i == 0:
+            a = prime(i+1)
+            primes.append(a)
+        else:
+            a = prime(i)
+            primes.append(a)
+    clear()
+
+
+def clear():
+    for i in range(len(primes)-1):
+        if primes[i+1] == 2:
+            primes.remove(primes[i])
+
+
+main()
+print(primes)
