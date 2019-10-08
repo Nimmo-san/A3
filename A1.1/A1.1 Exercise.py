@@ -1,5 +1,4 @@
 
-
-x = input("Enter: ")
+x = input()
 print("\n")
 print(x)
