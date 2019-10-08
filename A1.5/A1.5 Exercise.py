@@ -1,13 +1,12 @@
-
 import math
 b=0
 list = []
 sortedlist = []
-x = float(input("Enter a float: "))
+x = float(input())
 list.append(x)
-y = float(input("Enter a float: "))
+y = float(input())
 list.append(y)
-z = float(input("Enter a float: "))
+z = float(input())
 list.append(z)
 
 for i in range(len(list)):
@@ -15,10 +14,10 @@ for i in range(len(list)):
     b = b + a
 print(math.sqrt(b))
 
-print("Type of the list -> ", type(list))
+print(type(list))
 sortedlist = sorted(list)
 print(sortedlist)
 
-print("Sum of the lowest and highest -> ",sortedlist[0] + sortedlist[len(sortedlist)-1])
+print(sortedlist[0] + sortedlist[len(sortedlist)-1])
 list.append(99.9)
-print("The list -> ", list)
+print(list)
