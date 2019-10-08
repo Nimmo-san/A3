@@ -1,4 +1,3 @@
-
-x = int(input("Enter number 1: "))
-y = int(input("Enter number 2: "))
+x = int(input())
+y = int(input())
 print(x*y)
