@@ -1,11 +1,10 @@
-
 list = []
 secondList = ['X', 'Y', 'Z']
 thirdList = []
 # b=0
 # a=0
-n = int(input("Enter an integer: "))
-print("Enter Floating numbers: ")
+n = int(input())
+#print("Enter Floating numbers: ")
 for i in range(n):
     x = float(input())
     list.append(x)
