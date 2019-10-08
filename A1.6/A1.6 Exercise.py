@@ -1,5 +1,9 @@
 
 list = []
+secondList = ['X', 'Y', 'Z']
+thirdList = []
+# b=0
+# a=0
 n = int(input("Enter an integer: "))
 print("Enter Floating numbers: ")
 for i in range(n):
@@ -13,7 +17,7 @@ print(sorted(list, reverse=True))
 print("-------------------------------------")
 for i in range(len(list)):
     print(list[i])
-    print("\n")
+    #print("\n")
 
 print("-------------------------------------")
 for i in range(len(list)):
@@ -24,5 +28,14 @@ for i in range(len(list)):
         print("{} > 5".format(a))
     else:
         print("{} = 5".format(a))
-    print("\n")
+    #print("\n")
 print("-------------------------------------")
+
+
+for i in range(3*n):
+    for j in range(len(list)):
+        for z in range(len(secondList)):
+            new_tuple = (list[j], secondList[z])
+            thirdList.append(new_tuple)
+
+print(thirdList)
