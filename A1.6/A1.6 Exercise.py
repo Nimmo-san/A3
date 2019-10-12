@@ -11,14 +11,15 @@ for i in range(n):
 
 
 print(list)
-print(sorted(list, reverse=True))
+#print(sorted(list, reverse=True))
+sorted(list, reverse=True)
 
-print("-------------------------------------")
+#print("-------------------------------------")
 for i in range(len(list)):
     print(list[i])
     #print("\n")
 
-print("-------------------------------------")
+#print("-------------------------------------")
 for i in range(len(list)):
     a = list[i]
     if a < 5:
@@ -28,7 +29,7 @@ for i in range(len(list)):
     else:
         print("{} = 5".format(a))
     #print("\n")
-print("-------------------------------------")
+#print("-------------------------------------")
 
 
 for i in range(3*n):
