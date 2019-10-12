@@ -1,10 +1,10 @@
 
 class Avatar:
     def __init__(self):
-        name = "no name"
-        experience = 1
-        equipment = []
-        health = 4
+        self.name = "no name"
+        self.experience = 1
+        self.equipment = []
+        self.health = 4
 
     def status(self):
         print("Info about {}".format(self.name))
