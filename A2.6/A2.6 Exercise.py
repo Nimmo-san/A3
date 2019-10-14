@@ -5,10 +5,11 @@ def draw(points, style='r-'):
     x = []
     y = []
 
+    # Watch out for this one, wrong way of reading tuples
     for i in range(len(points)):
-        for j in range(len(points[i]) - 1):
-            x.append(points[i][j])
-            y.append((points[i][j + 1]))
+        for j in range(len(points[i])):
+            if j == 0: x.append(points[i][j])
+            else: y.append(points[i][j])
 
     plot.plot(x, y, style)
 
@@ -23,23 +24,25 @@ def main():
     plot.ylabel('y')
 
     filename = input()
-    with open(filename, 'r') as f:
-        n = int(f.readline(1))
+    f = open(filename, 'r')
+    n = int(f.readline())
 
     points = []
 
-    for i in range(2, n, 1):
-        line = f.readline(i)
-        splitline = line.split(',')
-        x = float(splitline[0])
-        y = float(splitline[1])
+    lines = [line.rstrip('\n') for line in f]
+
+    for i in range(len(lines)):
+        linesplit = lines[0].split(',')
+        x = linesplit[0]
+        y = linesplit[1]
         a = (x, y)
         points.append(a)
     f.close()
 
+    print(points)
+
     draw(points, 'b-')
     draw(points, 'ro')
     plot.show()
-
 
 main()
