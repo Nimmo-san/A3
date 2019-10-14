@@ -1,4 +1,3 @@
-
 import matplotlib.pyplot as plot
 import math
 
@@ -40,4 +39,3 @@ for i in range(n+1):
         points.append(a)
 # !!!!!
 drawPoints(points)
-
