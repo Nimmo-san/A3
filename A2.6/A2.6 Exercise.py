@@ -8,8 +8,12 @@ def draw(points, style='r-'):
     # Watch out for this one, wrong way of reading tuples
     for i in range(len(points)):
         for j in range(len(points[i])):
-            if j == 0: x.append(points[i][j])
-            else: y.append(points[i][j])
+            if j == 0:
+                x.append(points[i][j])
+                # print(j)
+            else:
+                y.append(points[i][j])
+                # print(j)
 
     plot.plot(x, y, style)
 
@@ -31,18 +35,18 @@ def main():
 
     lines = [line.rstrip('\n') for line in f]
 
-    for i in range(len(lines)):
-        linesplit = lines[0].split(',')
-        x = linesplit[0]
-        y = linesplit[1]
-        a = (x, y)
-        points.append(a)
+    for i in range(n):
+        split = lines[i].split(',')
+        x = split[0]
+        y = split[1]
+        tuple_numbers = (x, y)
+        points.append(tuple_numbers)
     f.close()
-
-    print(points)
 
     draw(points, 'b-')
     draw(points, 'ro')
     plot.show()
 
+
 main()
+
