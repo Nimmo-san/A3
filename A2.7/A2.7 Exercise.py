@@ -1,3 +1,4 @@
+# A2.7
 import matplotlib.pyplot as plot
 import math
 
@@ -9,8 +10,8 @@ def forward(state, distance):
         return state
     # Moves in the direction its facing if state of pen is down
     elif state[2] == True or state[2] == 1:
-        x1 = (int(distance) * math.cos(math.radians(state[len(state)-1])))
-        y1 = (int(distance) * math.sin(math.radians(state[len(state)-1])))
+        x1 = state[0] + (int(distance) * math.cos(math.radians(state[len(state)-1])))
+        y1 = state[1] + (int(distance) * math.sin(math.radians(state[len(state)-1])))
         xlist = [state[0], x1]
         ylist = [state[1], y1]
         plot.plot(xlist, ylist, 'r')
@@ -19,12 +20,12 @@ def forward(state, distance):
 
 def rotate(state, angle):
     print(state, angle)
-    if angle < 0:
+    if int(angle) < 0:
         print("Error!")
         exit(1)
     else:
         list1 = list(state)
-        list1[len(list1)-1] = angle
+        list1[len(list1)-1] = int(angle) + list1[len(list1)-1]
         state = tuple(list1)
         return state
 
@@ -54,15 +55,12 @@ def change_state(state, x1, y1):
 
 def main():
     filename = input()
-
+    command = ''
+    argument = ''
     axis = [-400, 400, -400, 400]
     plot.axis('square')
     plot.axis(axis)
     plot.title('Name...')
-
-    # pen = (x, y, state, angle)
-    penstate = (0, 0, False, 45)
-    lines = []
 
     f = open(filename, 'r')
     lines = [line.rstrip('\n') for line in f]
@@ -72,8 +70,31 @@ def main():
         split2 = split[1].split('>')
         command = split[0]
         argument = split2[0]
+        # test(command, argument)
         print(command, argument)
+        if command == 'FORWARD':
+            penstate = forward(penstate, argument)
+        elif command == 'ROTATE':
+            penstate = rotate(penstate, argument)
+        elif command == 'PEN':
+            penstate = pen(penstate, argument)
+        else:
+            print("Error!")
     plot.show()
 
 
+def test(command, argument):
+    penstate = (0, 10, True, 10)
+
+    if command == 'PEN':
+        print(pen(penstate, argument))
+    # elif command == 'ROTATE':
+    #     print(rotate(penstate, argument))
+    # elif command == 'FORWARD':
+    #     print(forward(penstate, argument))
+    else:
+        print("Error, no function found!")
+
 main()
+# pen = (x, y, state, angle)
+penstate = (0, 0, False, 45)
