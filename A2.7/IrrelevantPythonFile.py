@@ -3,6 +3,7 @@
 # The following lines of codes are
 # for the matter of debugging, it is not included
 # with the actual code for this project
+# It is for the development of the REPEAT function
 # def main():
 #     command = ''
 #     argument = ''

@@ -87,16 +87,32 @@ def main():
         command = split[0]
         argument = split2[0]
         print(command, argument)
+        # Testing each of the functions
+        # using three different test functions
         if command == 'FORWARD':
-            state_pen = forward(state_pen, argument)
+            test_forward(state_pen, argument)
+            # state_pen = forward(state_pen, argument)
             # print(penstate)
         elif command == 'ROTATE':
-            state_pen = rotate(state_pen, argument)
+            test_rotate(state_pen, argument)
+            # state_pen = rotate(state_pen, argument)
         elif command == 'PEN':
-            state_pen = pen(state_pen, argument)
+            test_pen(state_pen, argument)
+            # state_pen = pen(state_pen, argument)
         else:
             print("Error!")
     plot.show()
 
+
+def test_forward(state, argument):
+    print(forward(state, argument))
+
+
+def test_rotate(state, argument):
+    print(rotate(state, argument))
+
+
+def test_pen(state, argumeent):
+    print(pen(state, argumeent))
 
 main()
