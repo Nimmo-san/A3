@@ -13,6 +13,7 @@ def polygon(xc , yc, nsides, length, angle):
     for i in range(nsides + 1):
         xi = xc + r * math.sin(((2 * math.pi / nsides) * i) + math.radians(angle))
         yi = yc + r * math.cos(((2 * math.pi / nsides) * i) + math.radians(angle))
+
         a = (xi, yi)
         listofpoints.append(a)
 

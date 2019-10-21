@@ -102,16 +102,19 @@ def main():
             print("Error!")
     plot.show()
 
-# Forward function test
+
 def test_forward(state, argument):
+    # Forward function test
     print(forward(state, argument))
 
-# Rotate function test
+
 def test_rotate(state, argument):
+    # Rotate function test
     print(rotate(state, argument))
 
-# Pen function test
+
 def test_pen(state, argumeent):
+    # Pen function test
     print(pen(state, argumeent))
 
 main()
