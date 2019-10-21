@@ -1,6 +1,13 @@
 
 
 class Game:
+    @staticmethod
+    def search(self):
+        return None
+
+    @staticmethod
+    def evaluate(self):
+        return None
 
     def create_board(self):
         board = []
@@ -12,3 +19,4 @@ class Game:
 
     def __init__(self):
         self.size = 8
+
