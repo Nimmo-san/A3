@@ -89,15 +89,15 @@ def main():
         # Testing each of the functions
         # using three different test functions
         if command == 'FORWARD':
-            test_forward(state_pen, argument)
-            # state_pen = forward(state_pen, argument)
+            #test_forward(state_pen, argument)
+            state_pen = forward(state_pen, argument)
             # print(penstate)
         elif command == 'ROTATE':
-            test_rotate(state_pen, argument)
-            # state_pen = rotate(state_pen, argument)
+            #test_rotate(state_pen, argument)
+            state_pen = rotate(state_pen, argument)
         elif command == 'PEN':
-            test_pen(state_pen, argument)
-            # state_pen = pen(state_pen, argument)
+            #test_pen(state_pen, argument)
+            state_pen = pen(state_pen, argument)
         else:
             print("Error!")
     plot.show()

@@ -5,6 +5,7 @@
 previousterms = {}
 digits = []
 
+
 def fib(n):
     if n in previousterms:
         return previousterms[n]
@@ -20,13 +21,13 @@ def fib(n):
     return value
 
 
-for i in range(1, 1001):
+for i in range(1, 10001):
     num = fib(i)
     print(num, "\n")
-    count = 0
-    while num > 0:
-        num = num//10
-        count = count + 1
+    # count = 0
+    # while num > 0:
+    #     num = num//10
+    #     count = count + 1
 
 
-print(digits)
+# print(digits)
