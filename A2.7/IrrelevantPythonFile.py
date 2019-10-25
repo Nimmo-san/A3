@@ -27,7 +27,6 @@ def main():
         except:
             wrong = True
 
-
         if wrong:
             split = lines[i].split(' ')
             split2 = split[1].split(' ')
@@ -45,46 +44,17 @@ def main():
             repeatfunc.append(command)
             repeatfunc.append(argument)
 
-        if command == 'FORWARD':
-            state_pen = forward(state_pen, argument)
-        elif command == 'ROTATE':
-            state_pen = rotate(state_pen, argument)
-        elif command == 'PEN':
-            state_pen = pen(state_pen, argument)
-
-        else:
-            print("Error!")
-        # print(command, argument)
-    # print(repeatfunc)
+        print(command, argument)
+    print(repeatfunc)
 
 
-def pen(state, argument):
-    print(state, argument)
-    return state
-
-
-def rotate(state, argument):
-    print(state, argument)
-    return state
-
-
-def forward(state, argument):
-    print(state, argument)
-    return state
-
-
-def repeat(state, argument):
-    print("Argument: ", argument)
-    for i in range(1, int(argument)):
-        command = repeatfunc[i]
-        if command == 'FORWARD':
-            state = forward(state, repeatfunc[i+1])
-        elif command == 'ROTATE':
-            state = rotate(state, repeatfunc[i+1])
-        elif command == 'PEN':
-            state = pen(state, repeatfunc[i+1])
-        else:
-            print("Error!")
+def repeat(state, list):
+    # print("This is not working!")
+    if isinstance(int(list[1]), int):
+        for i in range(2, int(list[1])):
+            print("command, argument ", list[i], list[i+1])
+    else:
+        return
     return state
 
 
