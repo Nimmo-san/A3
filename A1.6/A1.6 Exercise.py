@@ -4,22 +4,22 @@ thirdList = []
 # b=0
 # a=0
 n = int(input())
-#print("Enter Floating numbers: ")
+# print("Enter Floating numbers: ")
 for i in range(n):
     x = float(input())
     list.append(x)
 
 
 print(list)
-#print(sorted(list, reverse=True))
+# print(sorted(list, reverse=True))
 sorted(list, reverse=True)
 
-#print("-------------------------------------")
+# print("-------------------------------------")
 for i in range(len(list)):
     print(list[i])
-    #print("\n")
+    # print("\n")
 
-#print("-------------------------------------")
+# print("-------------------------------------")
 for i in range(len(list)):
     a = list[i]
     if a < 5:
@@ -28,8 +28,8 @@ for i in range(len(list)):
         print("{} > 5".format(a))
     else:
         print("{} = 5".format(a))
-    #print("\n")
-#print("-------------------------------------")
+    # print("\n")
+# print("-------------------------------------")
 
 
 for i in range(3*n):
