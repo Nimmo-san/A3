@@ -9,14 +9,14 @@ n = 3
 r = length * (1/(2*math.sin(math.pi/n)))
 
 
-def drawPoints(points):
+def draw_points(points2):
     x = []
     y = []
 
-    for i in range(len(points)):
-        for j in range(len(points[i])-1):
-            x.append(points[i][j])
-            y.append((points[i][j+1]))
+    for i in range(len(points2)):
+        for j in range(len(points2[i])-1):
+            x.append(points2[i][j])
+            y.append((points2[i][j+1]))
 
     plot.plot(x, y, 'b')
     plot.plot(x, y, 'ro')
@@ -38,4 +38,4 @@ for i in range(n+1):
         a = (xi, yi)
         points.append(a)
 # !!!!!
-drawPoints(points)
+draw_points(points)
