@@ -7,7 +7,6 @@
 #
 all_func = []
 repeat_func = []
-rep_list = []
 
 
 def init():
@@ -48,33 +47,54 @@ def main(lines):
             found = False
 
         if found and command != 'REPEAT':
+            tuple_to = change(command, argument)
+            repeat_func.append(tuple_to)
 
-            repeat_func.append(command)
-            repeat_func.append(argument)
-
-        if argument != 'END':
-            all_func.append(command)
-            all_func.append(argument)
+        if command != 'REPEAT':
+            tuple_functions = change(command, argument)
+            all_func.append(tuple_functions)
 
         # print(command, argument)
-    print(change_to_tuple(repeat_func))
-    print(change_to_tuple(all_func))
-    print(merge_lists(rep_list, all_func, found_repeat))
+    rep_list = repeat(repeat_func, found_repeat)
+    remove_items(all_func, found_repeat, len(repeat_func))
+    plot(rep_list, found_repeat)
 
 
 # Might not be necessary
-# def plot():
-#
-#     for i in range(1, len(all_func)+1):
-#         command = all_func[2*(i-1)]
-#         argument = all_func[2*i - 1]
-#
-#         # if command == 'REPEAT':
-#         #     print(command, argument)
-#         # elif command == 'FORWARD':
-#         #     print(command, argument)
-#         # elif command ==
-#     return None
+def plot(repeated, given_index):
+    all_functions = merge_lists(repeated, all_func, given_index)
+    # print(all_functions)
+    for i in range(len(all_functions)):
+        for j in range(len(all_functions[i])-1):
+            command = all_functions[i][j]
+            argument = all_functions[i][j+1]
+            # print(command, argument)
+
+            if command == 'FORWARD':
+                print(command, argument)
+            elif command == 'ROTATE':
+                print(command, argument)
+            elif command == 'PEN':
+                print(command, argument)
+            else:
+                print("Error!")
+    return None
+
+
+def remove_items(list1, index, elements):
+    # print(list1)
+    if len(list1) <= 0:
+        return
+
+    end_index = index + elements
+    del list1[index:end_index]
+
+    return list1
+
+
+def change(command, argument):
+    tuple_of = (command, argument)
+    return tuple_of
 
 
 def repeat(list_to_repeated, argument):
@@ -95,24 +115,13 @@ def repeat(list_to_repeated, argument):
     return repeated_func
 
 
-def change_to_tuple(list):
-    list_tuple = []
-
-    # Going through the list to make
-    # a new tuple with the given values
-    # for each command and its corresponding argument
-    for i in range(1, int(1/2 * len(list))+1):
-        a = (list[2*(i-1)], list[2*i - 1])
-        list_tuple.append(a)
-    # Returning the list after adding
-    # the tuple to a new list
-    return list_tuple
-
-
 def merge_lists(fromlist, tolist, index):
 
     # Checking if the length of the fromlist
     # is at least one
+    # print(len(fromlist), fromlist)
+    # print(len(tolist), tolist)
+    # print(index)
     if len(fromlist) <= 0:
         return
 
@@ -122,6 +131,20 @@ def merge_lists(fromlist, tolist, index):
     # Returning the new list after merging
     # the two lists
     return tolist
+
+#
+# def change_to_tuple(list):
+#     list_tuple = []
+#
+#     # Going through the list to make
+#     # a new tuple with the given values
+#     # for each command and its corresponding argument
+#     for i in range(1, int(1/2 * len(list))+1):
+#         a = (list[2*(i-1)], list[2*i - 1])
+#         list_tuple.append(a)
+#     # Returning the list after adding
+#     # the tuple to a new list
+#     return list_tuple
 
 
 main(init())
