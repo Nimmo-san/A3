@@ -5,8 +5,13 @@
 # with the actual code for this project
 # It is for the development of the REPEAT function
 #
+
+import math
+import matplotlib.pyplot as plt
+
 all_func = []
 repeat_func = []
+lines = []
 
 
 def init():
@@ -16,26 +21,80 @@ def init():
     return lines
 
 
+def forward(state, distance):
+    print(state, distance)
+    x1 = state[0] + (int(distance) * math.cos(math.radians(state[len(state) - 1])))
+    y1 = state[1] + (int(distance) * math.sin(math.radians(state[len(state) - 1])))
+    # Returns if the state of the pen is up
+    if state[2] == False or state[2] == 0:
+        return change_state(state, x1, y1)
+    # Moves in the direction its facing if state of pen is down
+    elif state[2] == True or state[2] == 1:
+        xlist = [state[0], x1]
+        ylist = [state[1], y1]
+        plt.plot(xlist, ylist, 'r')
+        newstate = change_state(state, x1, y1)
+        return newstate
+
+
+def rotate(state, angle):
+    print(state, angle)
+    if int(angle) < -360:
+        print("Error!")
+        exit(1)
+    else:
+        list1 = list(state)
+        list1[len(list1)-1] = int(angle) + list1[len(list1)-1]
+        state = tuple(list1)
+        return state
+
+
+def pen(state, value):
+    print(state, value)
+    if value == 'down':
+        list1 = list(state)
+        list1[2] = True
+        state = tuple(list1)
+        return state
+    elif value == 'up':
+        list1 = list(state)
+        list1[2] = False
+        state = tuple(list1)
+        return state
+    else:
+        print("Error! Pen")
+
+
+def change_state(state, x1, y1):
+    # print(x1, y1)
+    list1 = list(state)
+    list1[0] = x1
+    list1[1] = y1
+    # print(tuple(list1))
+    return tuple(list1)
+
+
 def main(lines):
+    axis = [-400, 400, -400, 400]
+    plt.axis('square')
+    plt.axis(axis)
+    plt.title('Name...')
+
+    # pen = (x, y, state, angle)
+    state_pen = (0, 0, False, 0)
     command = ''
     argument = ''
     split = []
     split2 = []
     found_repeat = 0
-    wrong = False
     found = False
 
     for i in range(len(lines)):
         try:
-            split = lines[i].split('<')
-            split2 = split[1].split('>')
-        except:
-            wrong = True
-
-        if wrong:
             split = lines[i].split(' ')
             split2 = split[1].split(' ')
-            wrong = False
+        except:
+            pass
         command = split[0]
         argument = split2[0]
 
@@ -57,11 +116,11 @@ def main(lines):
         # print(command, argument)
     rep_list = repeat(repeat_func, found_repeat)
     remove_items(all_func, found_repeat, len(repeat_func))
-    plot(rep_list, found_repeat)
+    state_pen = plot(rep_list, found_repeat, state_pen)
 
 
 # Might not be necessary
-def plot(repeated, given_index):
+def plot(repeated, given_index, state):
     all_functions = merge_lists(repeated, all_func, given_index)
     # print(all_functions)
     for i in range(len(all_functions)):
@@ -71,14 +130,15 @@ def plot(repeated, given_index):
             # print(command, argument)
 
             if command == 'FORWARD':
-                print(command, argument)
+                state = forward(state, argument)
             elif command == 'ROTATE':
-                print(command, argument)
+                state = rotate(state, argument)
             elif command == 'PEN':
-                print(command, argument)
+                state = pen(state, argument)
             else:
                 print("Error!")
-    return None
+    plt.show()
+    return state
 
 
 def remove_items(list1, index, elements):
@@ -132,20 +192,7 @@ def merge_lists(fromlist, tolist, index):
     # the two lists
     return tolist
 
-#
-# def change_to_tuple(list):
-#     list_tuple = []
-#
-#     # Going through the list to make
-#     # a new tuple with the given values
-#     # for each command and its corresponding argument
-#     for i in range(1, int(1/2 * len(list))+1):
-#         a = (list[2*(i-1)], list[2*i - 1])
-#         list_tuple.append(a)
-#     # Returning the list after adding
-#     # the tuple to a new list
-#     return list_tuple
 
-
-main(init())
+lines = init()
+main(lines)
 

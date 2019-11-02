@@ -13,26 +13,32 @@ def main():
 
     for i in range(len(lines)):
         # print(lines[i])
-
-        # try:
-        #     split = lines[i].split('<')
-        #     split2 = split[1].split('>')
-        # except:
-        #     wrong = True
-        #
-        # if wrong:
-        #     split = lines[i].split(' ')
-        #     split2 = split[1].split(' ')
-        #     wrong = False
         try:
             split = lines[i].split(' ')
             split2 = split[1].split(' ')
         except:
             pass
-        tuple1 = (split[0], split2[0])
-        list_of_commands.append(tuple1)
+
+        command = split[0]
+        argument = split2[0]
+        list_of_commands.append(command)
+        list_of_commands.append(argument)
 
     print(list_of_commands)
+    print(len(list_of_commands))
+    for j in range(len(list_of_commands)):
+
+        index_a = 2*(j - 1)
+        index_b = (2 * j) - 1
+        if index_a < 0 and index_b < 0:
+            continue
+        if index_a > 24 or index_b > 24:
+            break
+
+        value_c = list_of_commands[index_a]
+        value_a = list_of_commands[index_b]
+
+        print(index_a, value_c, index_b, value_a)
 
 
 main()
