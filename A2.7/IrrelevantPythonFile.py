@@ -55,9 +55,9 @@ def main(lines):
             all_func.append(tuple_functions)
 
         # print(command, argument)
-    rep_list = repeat(repeat_func, found_repeat)
-    remove_items(all_func, found_repeat, len(repeat_func))
-    plot(rep_list, found_repeat)
+    # rep_list = repeat(repeat_func, found_repeat)
+    # remove_items(all_func, found_repeat, len(repeat_func))
+    # plot(rep_list, found_repeat)
 
 
 # Might not be necessary
