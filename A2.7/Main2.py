@@ -40,5 +40,27 @@ def main():
 
         print(index_a, value_c, index_b, value_a)
 
+#
+# for j in range(len(func)):
+#
+#     index_a = 2 * (j - 1)
+#     index_b = (2 * j) - 1
+#     if index_a < 0 and index_b < 0:
+#         continue
+#     if index_a > len(func) or index_b > len(func):
+#         break
+#
+#     value1 = func[index_a]
+#     value2 = func[index_b]
+#
+#     if value1 == 'REPEAT' and value2 != 'END':
+#         found = True
+#
+#     if found:
+#         value = (value1, value2)
+#         emptylist.append(value)
+#
+#     if value1 == 'REPEAT' and value2 == 'END':
+#         found = False
 
 main()
