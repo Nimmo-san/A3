@@ -35,7 +35,7 @@ angle = float(input())
 
 list_p = polygon(xc, yc, nsides, length, angle)
 
-f = open('G:\Documents\points.txt', 'w')
+f = open('..\A2.5\points.txt', 'w')
 f.write(str(len(list_p)))
 f.write("\n")
 
