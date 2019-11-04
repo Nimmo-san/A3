@@ -1,12 +1,17 @@
 # A2.7
-import matplotlib.pyplot as plot
 import math
+import matplotlib.pyplot as plt
+
+all_func = []
+repeat_func = []
+lines = []
 
 
-x1 = [0, 0]
-y1 = [-400, 400]
-x2 = [-400, 400]
-y2 = [0, 0]
+def init():
+    filename = '..\A2.7\test.txt'
+    f = open(filename, 'r')
+    lines = [line.rstrip('\n') for line in f]
+    return lines
 
 
 def forward(state, distance):
@@ -20,7 +25,7 @@ def forward(state, distance):
     elif state[2] == True or state[2] == 1:
         xlist = [state[0], x1]
         ylist = [state[1], y1]
-        plot.plot(xlist, ylist, 'r')
+        plt.plot(xlist, ylist, 'r')
         newstate = change_state(state, x1, y1)
         return newstate
 
@@ -62,45 +67,122 @@ def change_state(state, x1, y1):
     return tuple(list1)
 
 
-def main():
-    filename = input()
-    command = ''
-    argument = ''
-
+def main(lines):
     axis = [-400, 400, -400, 400]
-    plot.axis('square')
-    plot.axis(axis)
-    plot.title('Name...')
-    plot.plot(x2, y2, 'k:')
-    plot.plot(x1, y1, 'k:')
+    plt.axis('square')
+    plt.axis(axis)
+    plt.title('Name...')
 
     # pen = (x, y, state, angle)
     state_pen = (0, 0, False, 0)
+    command = ''
+    argument = ''
+    split = []
+    split2 = []
+    found_repeat = 0
+    found = False
 
-    f = open(filename, 'r')
-    lines = [line.rstrip('\n') for line in f]
-    # print(lines)
     for i in range(len(lines)):
-        split = lines[i].split('<')
-        split2 = split[1].split('>')
+        try:
+            split = lines[i].split(' ')
+            split2 = split[1].split(' ')
+        except:
+            pass
         command = split[0]
         argument = split2[0]
-        print(command, argument)
-        # Testing each of the functions
-        # using three different test functions
-        if command == 'FORWARD':
-            #test_forward(state_pen, argument)
-            state_pen = forward(state_pen, argument)
-            # print(penstate)
-        elif command == 'ROTATE':
-            #test_rotate(state_pen, argument)
-            state_pen = rotate(state_pen, argument)
-        elif command == 'PEN':
-            #test_pen(state_pen, argument)
-            state_pen = pen(state_pen, argument)
-        else:
-            print("Error!")
-    plot.show()
+
+        if command == 'REPEAT' and argument != 'END':
+            found_repeat = i
+            found = True
+
+        if command == 'REPEAT' and argument == 'END':
+            found = False
+
+        if found and command != 'REPEAT':
+            tuple_to = change(command, argument)
+            repeat_func.append(tuple_to)
+
+        if command != 'REPEAT':
+            tuple_functions = change(command, argument)
+            all_func.append(tuple_functions)
+
+            # print(command, argument)
+    rep_list = repeat(repeat_func, found_repeat)
+    remove_items(all_func, found_repeat, len(repeat_func))
+    state_pen = plot(rep_list, found_repeat, state_pen)
+
+
+# Might not be necessary
+def plot(repeated, given_index, state):
+    all_functions = merge_lists(repeated, all_func, given_index)
+    # print(all_functions)
+    for i in range(len(all_functions)):
+        for j in range(len(all_functions[i]) - 1):
+            command = all_functions[i][j]
+            argument = all_functions[i][j + 1]
+            # print(command, argument)
+
+            if command == 'FORWARD':
+                state = forward(state, argument)
+            elif command == 'ROTATE':
+                state = rotate(state, argument)
+            elif command == 'PEN':
+                state = pen(state, argument)
+            else:
+                print("Error!")
+    plt.show()
+    return state
+
+
+def remove_items(list1, index, elements):
+    # print(list1)
+    if len(list1) <= 0:
+        return
+
+    end_index = index + elements
+    del list1[index:end_index]
+
+    return list1
+
+
+def change(command, argument):
+    tuple_of = (command, argument)
+    return tuple_of
+
+
+def repeat(list_to_repeated, argument):
+    repeated_func = []
+
+    # Checking if list to be repeated
+    # is empty or not
+    if len(list_to_repeated, ) <= 0:
+        return
+
+    for i in range(int(argument)):
+        for j in range(len(list_to_repeated, )):
+            a = list_to_repeated[j]
+            repeated_func.append(a)
+    # Returning the new list after
+    # the elements in the list are repeated
+    # a certain number of times
+    return repeated_func
+
+
+def merge_lists(fromlist, tolist, index):
+    # Checking if the length of the fromlist
+    # is at least one
+    # print(len(fromlist), fromlist)
+    # print(len(tolist), tolist)
+    # print(index)
+    if len(fromlist) <= 0:
+        return
+
+    for i in range(index, len(tolist), len(fromlist)):
+        for j in range(len(fromlist) - 1, -1, -1):
+            tolist.insert(i, fromlist[j])
+    # Returning the new list after merging
+    # the two lists
+    return tolist
 
 
 def test_forward(state, argument):
@@ -113,8 +195,10 @@ def test_rotate(state, argument):
     print(rotate(state, argument))
 
 
-def test_pen(state, argumeent):
+def test_pen(state, argument):
     # Pen function test
-    print(pen(state, argumeent))
+    print(pen(state, argument))
 
-main()
+
+lines = init()
+main(lines)
