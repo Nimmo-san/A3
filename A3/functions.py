@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 
+
 def makeList(data_full_path):
     # print(data_full_path)
     full_list = []
@@ -35,9 +36,9 @@ def plotList(name, list_tuples, color, xaxis, yaxis):
     # Goes through the list of tuples
     # And appends it to its corresponding list
     for i in range(len(list_tuples)):
-        for j in range(len(list_tuples[i])-1):
+        for j in range(len(list_tuples[i]) - 1):
             xi = list_tuples[i][j]
-            yi = list_tuples[i][j+1]
+            yi = list_tuples[i][j + 1]
             x.append(xi)
             y.append(yi)
     # Plots a 2-dimensional graph
@@ -48,6 +49,23 @@ def plotList(name, list_tuples, color, xaxis, yaxis):
     plt.ylabel(yaxis)
     plt.legend()
 
+
+def correctFile(input_file, output_file):
+    try:
+        toreadfile = open(input_file, 'r')
+    except FileNotFoundError:
+        print("FILE COULD NOT BE FOUND!")
+        exit(1)
+
+    try:
+        writefile = open(output_file, 'w')
+    except FileNotFoundError:
+        print("File could't be found!")
+        writefile = open(output_file, 'w+')
+
+    print(toreadfile)
+    toreadfile.close()
+    writefile.close()
 
 # # file = 'E:/University\Coding\A3ProjectPython\ProjectData\Data.nh.txt'
 # file = '..\A3\Data.nh.txt'
