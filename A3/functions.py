@@ -54,16 +54,17 @@ def correctFile(input_file, output_file):
     try:
         toreadfile = open(input_file, 'r')
     except FileNotFoundError:
-        print("FILE COULD NOT BE FOUND!")
+        print("File couldn't be found!")
         exit(1)
 
     try:
         writefile = open(output_file, 'w')
     except FileNotFoundError:
-        print("File could't be found!")
+        print("File could't be found! \n File being created.")
         writefile = open(output_file, 'w+')
 
-    print(toreadfile)
+    lines = [line.rstrip('\n') for line in toreadfile]
+    print(lines[0][0:8])
     toreadfile.close()
     writefile.close()
 
