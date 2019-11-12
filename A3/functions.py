@@ -88,6 +88,7 @@ def split_date(data):
         altered_data.append(split)
     return altered_data
 
+
 def correctFile(input_file, output_file):
     removed_pattern = []
     data = []
