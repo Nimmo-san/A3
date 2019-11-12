@@ -13,6 +13,6 @@ plotList('DEAD!', list_tuples, 'r', 'DEAD I', 'DEAD II')
 # Shows the plotted graph
 # plt.show()
 
-fakedata = '..\A3/textfiles\Data.monthly_nh.txt'
+fakedata = '..\A3/textfiles\FakeData.txt'
 fakeoutput = '..\A3/textfiles/Here.txt'
 correctFile(fakedata, fakeoutput)

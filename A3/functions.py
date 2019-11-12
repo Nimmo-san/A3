@@ -134,7 +134,7 @@ def correctFile(input_file, output_file):
         string1 = ','.join(line)
         full_data.append(string1)
 
-    # print(full_data)
+    print(full_data)
 
     toreadfile.close()
     writefile.close()
