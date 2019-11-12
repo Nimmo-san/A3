@@ -11,7 +11,7 @@ plotList('DEAD!', list_tuples, 'r', 'DEAD I', 'DEAD II')
 # Saves the graph with the passed in name as a PNG
 # plt.savefig('..\A3/images/test.png')
 # Shows the plotted graph
-plt.show()
+# plt.show()
 
 fakedata = '..\A3/textfiles\Data.monthly_nh.txt'
 fakeoutput = '..\A3/textfiles/Here.txt'

@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import re
 
 
 def makeList(data_full_path):
@@ -50,21 +51,66 @@ def plotList(name, list_tuples, color, xaxis, yaxis):
     plt.legend()
 
 
+def remove_pattern(data):
+    removed_pattern = []
+    if len(data) <= 0:
+        print("Length of data is null!")
+        return None
+
+    for line in data:
+        try:
+            string = re.sub(' +', ',', line)
+        except:
+            pass
+        removed_pattern.append(string)
+    return removed_pattern
+
+
+def split_date(data):
+    altered_data = []
+    if len(data) <= 0:
+        print("Length of data is null")
+        return None
+
+    for line in data:
+        split = line.split(',')
+        try:
+            date = line[0:7]
+        except:
+            pass
+
+        dates = date.split('/')
+        month = int(dates[1]) * 0.083
+        roundedmonth = "{:2.3}".format(month)
+
+        newstring = str(int(dates[0])+float(roundedmonth))
+        split = [word.replace(date, newstring) for word in split]
+        altered_data.append(split)
+    return altered_data
+
 def correctFile(input_file, output_file):
+    removed_pattern = []
+    data = []
+    full_data = []
     try:
         toreadfile = open(input_file, 'r')
-    except FileNotFoundError:
-        print("File couldn't be found!")
-        exit(1)
-
-    try:
         writefile = open(output_file, 'w')
     except FileNotFoundError:
-        print("File could't be found! \n File being created.")
+        print("File, {} couldn't be found!".format(input_file))
+        print("File, {} could't be found! \n File being created.".format(output_file))
         writefile = open(output_file, 'w+')
+        exit(1)
 
     lines = [line.rstrip('\n') for line in toreadfile]
-    print(lines[0][0:8])
+    removed_pattern = remove_pattern(lines)
+    data = split_date(removed_pattern)
+    # print(data)
+    
+    for line in data:
+        string1 = ','.join(line)
+        full_data.append(string1)
+
+    print(full_data)
     toreadfile.close()
     writefile.close()
 
