@@ -93,11 +93,11 @@ def split_date(data):
         # Splitting the data to get the year and month
         dates = date.split('/')
         month = int(dates[1]) * 0.083
-        roundedmonth = "{:2.3}".format(month)
-        # roundedmonth = round(float(floatmonth), 1)
+        rounded_month = "{:2.3}".format(month)
+
         # Making a new string based on the recently new data
         # which is the normalisations of the month
-        newstring = str(int(dates[0])+float(roundedmonth))
+        newstring = str(int(dates[0])+float(rounded_month))
         # The old is replaced with the new string using a list comprehension
         split = [word.replace(date, newstring) for word in split]
         # appended into the data
