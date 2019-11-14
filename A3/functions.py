@@ -94,7 +94,7 @@ def split_date(data):
         dates = date.split('/')
         month = int(dates[1]) * 0.083
         roundedmonth = "{:2.3}".format(month)
-
+        # roundedmonth = round(float(floatmonth), 1)
         # Making a new string based on the recently new data
         # which is the normalisations of the month
         newstring = str(int(dates[0])+float(roundedmonth))
@@ -104,6 +104,20 @@ def split_date(data):
         altered_data.append(split)
     # and returned
     return altered_data
+
+
+def write_tofile(data, file):
+    if len(data) <= 0:
+        return False
+
+    for line in data:
+        file.write(line + '\n')
+    return True
+
+
+def makeAverageList(input_file, integer_one, integer_two, number_months):
+
+    return None
 
 
 def correctFile(input_file, output_file):
@@ -134,10 +148,11 @@ def correctFile(input_file, output_file):
         string1 = ','.join(line)
         full_data.append(string1)
 
-    print(full_data)
+    success = write_tofile(full_data, writefile)
 
     toreadfile.close()
     writefile.close()
+    return success
 
 # # file = 'E:/University\Coding\A3ProjectPython\ProjectData\Data.nh.txt'
 # file = '..\A3\Data.nh.txt'
