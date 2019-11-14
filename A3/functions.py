@@ -85,6 +85,7 @@ def split_date(data):
         split = line.split(',')
         try:
             # Accessing the data from the index 0 till 7
+            # Assuming date is always betwene index 0 and 7
             date = line[0:7]
         except:
             # if not pass it
@@ -103,6 +104,7 @@ def split_date(data):
         # appended into the data
         altered_data.append(split)
     # and returned
+    # print(altered_data)
     return altered_data
 
 
@@ -115,7 +117,7 @@ def write_tofile(data, file):
     return True
 
 
-def makeAverageList(input_file, integer_one, integer_two, number_months):
+def makeAverageList(input_file, column_Value, column_Value2, number_months=0):
 
     return None
 
