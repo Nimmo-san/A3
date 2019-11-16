@@ -1,5 +1,22 @@
 import matplotlib.pyplot as plt
+import os
 import re
+
+
+def openFile(file_path, argument):
+    list_arguments = ['r', 'w', 'w+', 'a', 'rb',
+    'r+', 'rb+', 'wb', 'wb+', 'ab', 'a+', 'ab+']
+    if os.path.exists(file_path):
+        if argument in list_arguments:
+            try:
+                file = open(file_path, argument)
+                return file
+            except FileNotFoundError:
+                return
+        print("Given argument: {} is invalid".format(argument))
+    else:
+        print("File {} could not be found!".format(file_path))
+    return file
 
 
 def makeList(data_full_path):
@@ -16,6 +33,7 @@ def makeList(data_full_path):
 
     # Reads the data from the list and appends it to a list
     lines = [line.rstrip('\n') for line in f]
+    f.close()
     # Iteration through the data and splits by a space
     for line in lines:
         try:
@@ -26,8 +44,7 @@ def makeList(data_full_path):
         year_data_tuple = (split[0], split[1])
         full_list.append(year_data_tuple)
     # Checks if list is empty, if not it returns the list
-    if len(full_list) != 0:
-        return full_list
+    return full_list if len(full_list) != 0 else None
 
 
 def plotList(name, list_tuples, color, xaxis, yaxis):
@@ -117,8 +134,9 @@ def write_tofile(data, file):
     return True
 
 
-def makeAverageList(input_file, column_Value, column_Value2, number_months=0):
-
+def makeAverageList(input_file, column_Value=0, column_Value2=0, number_months=0):
+    file = openFile(input_file, 'r')
+    print(file)
     return None
 
 
