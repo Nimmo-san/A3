@@ -1,6 +1,7 @@
-import matplotlib.pyplot as plt
 import os
 import re
+
+import matplotlib.pyplot as plt
 
 
 def openFile(file_path, argument):
@@ -134,19 +135,39 @@ def write_tofile(data, file):
     return True
 
 
+def average(data):
+    if len(data) <= 0:
+        return 0
+    aver = float('{:5.3}'.format(sum(data) / len(data)))
+    return aver
+
+
 def makeAverageList(input_file, column_Value=0, column_Value2=0, number_months=0):
-    data_ave = []
+    columndata1 = []
+    columndata2 = []
+    counter = 0
     file = openFile(input_file, 'r')
     lines = [line.rstrip('\n') for line in file]
     if not file.close():
         print("{} is Open!".format(file.name))
         file.close()
 
-    for line in lines:
-        data_ave = line.split(',')
-        print(data_ave)
-        # for i in range(1, number_months):
+    if number_months <= len(lines):
+        for line in lines:
+            data2 = line.split(',')
+            # print(data2)
+            if counter < number_months:
+                for i in range(1, len(data2)):
+                    if column_Value == i:
+                        columndata1.append(data2[i])
+                    elif column_Value2 == i:
+                        columndata2.append(data2[i])
+                counter = counter + 1
+    else:
+        print("Number of months, {}, out of range!".format(number_months))
 
+    columndata1 = [float(i) for i in columndata1]
+    columndata2 = [float(i) for i in columndata2]
 
     return None
 
