@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 
 
 def openFile(file_path, argument):
+    file = None
     list_arguments = ['r', 'w', 'w+', 'a', 'rb',
     'r+', 'rb+', 'wb', 'wb+', 'ab', 'a+', 'ab+']
     if os.path.exists(file_path):
