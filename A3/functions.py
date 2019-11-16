@@ -135,8 +135,19 @@ def write_tofile(data, file):
 
 
 def makeAverageList(input_file, column_Value=0, column_Value2=0, number_months=0):
+    data_ave = []
     file = openFile(input_file, 'r')
-    print(file)
+    lines = [line.rstrip('\n') for line in file]
+    if not file.close():
+        print("{} is Open!".format(file.name))
+        file.close()
+
+    for line in lines:
+        data_ave = line.split(',')
+        print(data_ave)
+        # for i in range(1, number_months):
+
+
     return None
 
 

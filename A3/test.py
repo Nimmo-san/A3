@@ -51,7 +51,7 @@ def removefile(file):
 #         print("FILE: {} --> {}".format(output_file, removefile(output_file)))
 #         print('\n')
 
-print(makeAverageList(parent_path + '\Data.monthly_nh.txt', 0, 0, 0))
+makeAverageList(parent_path + '\Here.txt', 0, 0, 0)
 
 
 # lines = [line.rstrip('\n') for line in f]
