@@ -25,12 +25,8 @@ def makeList(data_full_path):
     # print(data_full_path)
     full_list = []
     # Checks if the file exists or not
-    try:
-        f = open(data_full_path, 'r')
-    except FileNotFoundError:
-        # If not it prints an error statement to the console
-        print("FILE COULD NOT BE OPENED!")
-        # And exits with argument 1
+    f = openFile(data_full_path, 'r')
+    if f == None:
         exit(1)
 
     # Reads the data from the list and appends it to a list
@@ -146,11 +142,14 @@ def average(data):
 def makeAverageList(input_file, column_Value=0, column_Value2=0, number_months=0):
     columndata1 = []
     columndata2 = []
+    ave_lists = []
     counter = 0
+    ave1 = 0
+    ave2 = 0
     file = openFile(input_file, 'r')
     lines = [line.rstrip('\n') for line in file]
     if not file.close():
-        print("{} is Open!".format(file.name))
+        # print("{} is Open!".format(file.name))
         file.close()
 
     if number_months <= len(lines):
@@ -158,19 +157,31 @@ def makeAverageList(input_file, column_Value=0, column_Value2=0, number_months=0
             data2 = line.split(',')
             # print(data2)
             if counter < number_months:
-                for i in range(1, len(data2)):
+                for i in range(len(data2)):
                     if column_Value == i:
                         columndata1.append(data2[i])
                     elif column_Value2 == i:
                         columndata2.append(data2[i])
                 counter = counter + 1
+            else:
+                print(counter)
+                counter = 0
     else:
         print("Number of months, {}, out of range!".format(number_months))
+        print("File contains less data to interate over! Check yo file's data!")
+
+    print(counter)
 
     columndata1 = [float(i) for i in columndata1]
     columndata2 = [float(i) for i in columndata2]
 
-    return None
+    if len(columndata1) != 0 and len(columndata2) != 0:
+        ave1 = float("{:5.3f}".format(sum(columndata1) / len(columndata1)))
+        ave2 = float("{:5.3f}".format(sum(columndata2) / len(columndata2)))
+
+    ave_tuple = (ave1, ave2)
+    ave_lists.append(ave_tuple)
+    return ave_lists
 
 
 def correctFile(input_file, output_file):
