@@ -132,56 +132,80 @@ def write_tofile(data, file):
     return True
 
 
-def average(data):
-    if len(data) <= 0:
-        return 0
-    aver = float('{:5.3}'.format(sum(data) / len(data)))
-    return aver
+# def divide_chunks(l, n):
+#     for i in range(0, len(l), n):
+#         yield l[i:i + n]
 
 
-def makeAverageList(input_file, column_Value=0, column_Value2=0, number_months=0):
-    columndata1 = []
-    columndata2 = []
-    ave_lists = []
-    counter = 0
-    ave1 = 0
-    ave2 = 0
+def changetuples(data):
+    return [tuple(element) for element in data]
+
+
+def tofloat(lst):
+    return [tofloat(i) if isinstance(i, list) else float(i) for i in lst]
+
+
+def divide_chunks(l, n):
+    for i in range(0, len(l), n):
+        yield l[i:i + n]
+
+
+def makeAverageList(input_file, column_v1=0, column_v2=0, number_months=0):
+    column1 = []
+
     file = openFile(input_file, 'r')
     lines = [line.rstrip('\n') for line in file]
     if not file.close():
-        # print("{} is Open!".format(file.name))
         file.close()
 
-    if number_months <= len(lines):
-        for line in lines:
-            data2 = line.split(',')
-            # print(data2)
-            if counter < number_months:
-                for i in range(len(data2)):
-                    if column_Value == i:
-                        columndata1.append(data2[i])
-                    elif column_Value2 == i:
-                        columndata2.append(data2[i])
-                counter = counter + 1
-            else:
-                print(counter)
-                counter = 0
-    else:
-        print("Number of months, {}, out of range!".format(number_months))
-        print("File contains less data to interate over! Check yo file's data!")
+    if len(lines) % number_months != 0:
+        print("Pick a value that evenly divides the data! {}".format(file.name))
+        exit(1)
 
-    print(counter)
+    i = 0
+    while len(lines) - i != 0:
+        split = lines[i].split(',')
+        for element in split:
+            if split.index(element) == column_v1:
+                column1.append(element)
+            elif split.index(element) == column_v2:
+                column1.append(element)
+        i = i + 1
 
-    columndata1 = [float(i) for i in columndata1]
-    columndata2 = [float(i) for i in columndata2]
+    # print(column1)
+    list1 = []
+    for i in range(len(column1) - 1):
+        data1 = 2 * (i - 1)
+        data2 = 2 * i - 1
+        if data1 < 0 and data2 < 0:
+            continue
+        if data1 > len(column1) or data2 > len(column1):
+            break
 
-    if len(columndata1) != 0 and len(columndata2) != 0:
-        ave1 = float("{:5.3f}".format(sum(columndata1) / len(columndata1)))
-        ave2 = float("{:5.3f}".format(sum(columndata2) / len(columndata2)))
+        # print(data1, data2)
+        tuple1 = (column1[data1], column1[data2])
+        list1.append(tuple1)
 
-    ave_tuple = (ave1, ave2)
-    ave_lists.append(ave_tuple)
-    return ave_lists
+    list1 = list(divide_chunks(list1, number_months))
+    ave_list = []
+
+    for line in list1:
+        # print(line)
+        summ = 0
+        average = 0
+        summ2 = 0
+        average2 = 0
+        i = 0
+        j = 0
+        while len(line) - i != 0 and len(line[i]) - j != 0:
+            summ = summ + float(line[i][j])
+            average = summ / len(line)
+            summ2 = summ2 + float(line[i][j + 1])
+            average2 = summ2 / len(line)
+            i = i + 1
+        tuple2 = ("{:5.3f}".format(average), "{:5.3f}".format(average2))
+        ave_list.append(tuple2)
+    return ave_list
 
 
 def correctFile(input_file, output_file):
@@ -217,7 +241,3 @@ def correctFile(input_file, output_file):
     toreadfile.close()
     writefile.close()
     return success
-
-# # file = 'E:/University\Coding\A3ProjectPython\ProjectData\Data.nh.txt'
-# file = '..\A3\Data.nh.txt'
-# print(make_list(file))
