@@ -39,12 +39,12 @@ for i in range(len(IO_monthly_files) - 1):
     success = correctFile(input_file, output_file)
     # print("FILE: {} --> {}".format(input_file, success))
 
-months = 48
-# list1 = makeAverageList(parent_path + '\Parsed.monthly_out.nh.txt', 0, 2, months)
-# list2 = makeAverageList(parent_path + '\Parsed.monthly_out.ns.txt', 0, 2, months)
+months = 1
+list1 = makeAverageList(parent_path + '\Parsed.monthly_out.nh.txt', 0, 2, months)
+list2 = makeAverageList(parent_path + '\Parsed.monthly_out.ns.txt', 0, 2, months)
 list3 = makeAverageList(parent_path + '\Parsed.monthly_out.sh.txt', 0, 4, months)
-# plotList("Data1", list1, 'mo', 'x', 'y')
-# plotList("Data2", list2, 'ko', 'x', 'y')
+plotList("Data1", list1, 'mo', 'x', 'y')
+plotList("Data2", list2, 'ko', 'x', 'y')
 plotList("Data3", list3, 'ro', 'x', 'y')
 plt.show()
 plt.savefig('..\A3/images/A3part1.png')

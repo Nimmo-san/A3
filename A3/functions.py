@@ -51,12 +51,9 @@ def plotList(name, list_tuples, color, xaxis, yaxis):
     y = []
     # Goes through the list of tuples
     # And appends it to its corresponding list
-    for i in range(len(list_tuples)):
-        for j in range(len(list_tuples[i]) - 1):
-            xi = list_tuples[i][j]
-            yi = list_tuples[i][j + 1]
-            x.append(xi)
-            y.append(yi)
+    for (xp, yp) in list_tuples:
+        x.append(xp)
+        y.append(yp)
     # Plots a 2-dimensional graph
     # With the corresponding values of x and y
     plt.plot(x, y, color, label=name)
@@ -137,12 +134,8 @@ def write_tofile(data, file):
 #         yield l[i:i + n]
 
 
-def changetuples(data):
+def change_tuples(data):
     return [tuple(element) for element in data]
-
-
-def tofloat(lst):
-    return [tofloat(i) if isinstance(i, list) else float(i) for i in lst]
 
 
 def divide_chunks(l, n):
@@ -160,51 +153,51 @@ def makeAverageList(input_file, column_v1=0, column_v2=0, number_months=0):
 
     if len(lines) % number_months != 0:
         print("Pick a value that evenly divides the data! {}".format(file.name))
-        exit(1)
+        # exit(1)
 
-    i = 0
-    while len(lines) - i != 0:
-        split = lines[i].split(',')
-        for element in split:
-            if split.index(element) == column_v1:
-                column1.append(element)
-            elif split.index(element) == column_v2:
-                column1.append(element)
-        i = i + 1
+    column1 = []
+    for element in lines:
+        linessplit = element.split(',')
+        for i in range(len(linessplit)):
+            if i == 0:
+                column1.append(linessplit[i])
+            elif i == 2:
+                column1.append(linessplit[i])
+            else:
+                pass
 
     # print(column1)
-    list1 = []
-    for i in range(len(column1) - 1):
-        data1 = 2 * (i - 1)
-        data2 = 2 * i - 1
-        if data1 < 0 and data2 < 0:
+    data_list = []
+    n = len(column1)
+    for i in range(n):
+        c1data = 2 * (i - 1)
+        c2data = (2 * i) - 1
+
+        if c1data < 0 or c2data < 0:
             continue
-        if data1 > len(column1) or data2 > len(column1):
+        if c1data > n or c2data > n:
             break
+        tuple1 = (column1[c1data], column1[c2data])
+        data_list.append(tuple1)
 
-        # print(data1, data2)
-        tuple1 = (column1[data1], column1[data2])
-        list1.append(tuple1)
-
-    list1 = list(divide_chunks(list1, number_months))
+    list1 = list(divide_chunks(data_list, number_months))
     ave_list = []
 
     for line in list1:
-        # print(line)
-        summ = 0
-        average = 0
-        summ2 = 0
+        sum1 = 0
+        average1 = 0
+        sum2 = 0
         average2 = 0
         i = 0
         j = 0
         while len(line) - i != 0 and len(line[i]) - j != 0:
-            summ = summ + float(line[i][j])
-            average = summ / len(line)
-            summ2 = summ2 + float(line[i][j + 1])
-            average2 = summ2 / len(line)
-            i = i + 1
-        tuple2 = ("{:5.3f}".format(average), "{:5.3f}".format(average2))
-        ave_list.append(tuple2)
+            sum1 = sum1 + float(line[i][j])
+            average1 = sum1 / len(line)
+            sum2 = sum2 + float(line[i][j + 1])
+            average2 = sum2 / len(line)
+            i += 1
+        tuple1 = ("{:5.3f}".format(average1), "{:5.3f}".format(average2))
+        ave_list.append(tuple1)
     return ave_list
 
 
@@ -213,7 +206,7 @@ def correctFile(input_file, output_file):
     data = []
     full_data = []
 
-    # Ignores an error, rather than crash if the files dont exist
+    # Catches the error, rather than crash if the files don't exist
     try:
         toreadfile = open(input_file, 'r')
         writefile = open(output_file, 'w')

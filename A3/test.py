@@ -50,11 +50,11 @@ for i in range(len(IO_monthly_files) - 1):
     #     print("FILE: {} --> {}".format(output_file, removefile(output_file)))
     #     print('\n')
 
-list1 = makeAverageList(parent_path + '\Parsed.monthly_out.nh.txt', 0, 1, 4)
-list2 = makeAverageList(parent_path + '\Parsed.monthly_out.ns.txt', 0, 1, 12)
-list3 = makeAverageList(parent_path + '\Parsed.monthly_out.sh.txt', 0, 1, 48)
-plotList("Data1", list1, 'mo', 'x', 'y')
-plotList("Data2", list2, 'ko', 'x', 'y')
+# list1 = makeAverageList(parent_path + '\Parsed.monthly_out.nh.txt', 0, 1, 4)
+# list2 = makeAverageList(parent_path + '\Parsed.monthly_out.ns.txt', 0, 1, 12)
+list3 = makeAverageList(parent_path + '\Parsed.monthly_out.ns.txt', 0, 4, 12)
+# plotList("Data1", list1, 'mo', 'x', 'y')
+# plotList("Data2", list2, 'ko', 'x', 'y')
 plotList("Data3", list3, 'ro', 'x', 'y')
 plt.show()
 
