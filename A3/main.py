@@ -18,15 +18,15 @@ plotList(name='Northern hemisphere', color='slateblue',
 # Saves the graph
 plt.savefig('..\A3/images/A3part1.png')
 
-
-for i in range(len(IO_monthly_files) - 1):
+n = len(IO_monthly_files)
+for i in range(n - 1):
 
 
     input_file_index = 2 * (i - 1)
     output_file_index = 2 * i - 1
     if input_file_index < 0 and output_file_index < 0:
         continue
-    if input_file_index > len(IO_monthly_files) or output_file_index > len(IO_monthly_files):
+    if input_file_index > n or output_file_index > n:
         break
 
         # print("File, I:O -> {}:{}".format(IO_monthly_files[input_file_index],

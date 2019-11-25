@@ -97,7 +97,7 @@ def split_date(data):
         split = line.split(',')
         try:
             # Accessing the data from the index 0 till 7
-            # Assuming date is always betwene index 0 and 7
+            # Assuming date is always between index 0 and 7
             date = line[0:7]
         except:
             # if not pass it
@@ -151,11 +151,10 @@ def makeAverageList(input_file, column_v1=0, column_v2=0, number_months=0):
     if not file.close():
         file.close()
 
-    if len(lines) % number_months != 0:
-        print("Pick a value that evenly divides the data! {}".format(file.name))
-        # exit(1)
+    # if len(lines) % number_months != 0:
+    #     print("Pick a value that evenly divides the data! {}".format(file.name))
+    #     # exit(1)
 
-    column1 = []
     for element in lines:
         linessplit = element.split(',')
         for i in range(len(linessplit)):
@@ -239,15 +238,15 @@ def correctFile(input_file, output_file):
 def checkSize(n, m, l):
     return True if n == m and l == m else False
 
-# def plotWithError(name, type_s, list_tuples, list_tuples2, list_tuples3, color1='mo', color2='ro', xname='X', yname='Y'):
-#     n = len(list_tuples)
-#     m = len(list_tuples2)
-#     l = len(list_tuples3)
-#     if checkSize(n, m, l):
-#         continue
-#     else:
-#         Print("Size of list not equal: ", n, m, l)
-#
-#
-#
-#     return None
+
+def plotWithError(name, type_s, list_tuples, list_tuples2, list_tuples3, color1='mo', color2='ro', xname='X',
+                  yname='Y'):
+    n = len(list_tuples)
+    m = len(list_tuples2)
+    l = len(list_tuples3)
+    if checkSize(n, m, l):
+        pass
+    else:
+        print("Size of list not equal: ", n, m, l)
+
+    return None
