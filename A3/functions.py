@@ -239,15 +239,14 @@ def correctFile(input_file, output_file):
 def checkSize(n, m, l):
     return True if n == m and l == m else False
 
-# def plotWithError(name, type_s, list_tuples, list_tuples2, list_tuples3, color1='mo', color2='ro', xname='X', yname='Y'):
-#     n = len(list_tuples)
-#     m = len(list_tuples2)
-#     l = len(list_tuples3)
-#     if checkSize(n, m, l):
-#         continue
-#     else:
-#         Print("Size of list not equal: ", n, m, l)
-#
-#
-#
-#     return None
+def plotWithError(name, type_s, list_tuples, list_tuples2, list_tuples3, color1='mo', color2='ro', xname='X', yname='Y'):
+    n = len(list_tuples)
+    m = len(list_tuples2)
+    l = len(list_tuples3)
+    if checkSize(n, m, l):
+        continue
+    else:
+        Print("Size of list not equal: ", n, m, l)
+
+
+    return None
