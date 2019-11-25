@@ -56,7 +56,7 @@ def plotList(name, list_tuples, color, xaxis, yaxis):
         y.append(yp)
     # Plots a 2-dimensional graph
     # With the corresponding values of x and y
-    plt.plot(x, y, color, label=name)
+    plt.plot(x, y, color, label=name, markersize=2)
     # Shows the legend, which is the label name in the argument
     plt.xlabel(xaxis)
     plt.ylabel(yaxis)
@@ -159,9 +159,9 @@ def makeAverageList(input_file, column_v1=0, column_v2=0, number_months=0):
     for element in lines:
         linessplit = element.split(',')
         for i in range(len(linessplit)):
-            if i == 0:
+            if i == column_v1:
                 column1.append(linessplit[i])
-            elif i == 2:
+            elif i == column_v2:
                 column1.append(linessplit[i])
             else:
                 pass
@@ -234,3 +234,20 @@ def correctFile(input_file, output_file):
     toreadfile.close()
     writefile.close()
     return success
+
+
+def checkSize(n, m, l):
+    return True if n == m and l == m else False
+
+# def plotWithError(name, type_s, list_tuples, list_tuples2, list_tuples3, color1='mo', color2='ro', xname='X', yname='Y'):
+#     n = len(list_tuples)
+#     m = len(list_tuples2)
+#     l = len(list_tuples3)
+#     if checkSize(n, m, l):
+#         continue
+#     else:
+#         Print("Size of list not equal: ", n, m, l)
+#
+#
+#
+#     return None
