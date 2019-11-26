@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 
-from functions import makeList, correctFile, plotList, makeAverageList
+from functions import makeList, correctFile, makeAverageList, plotWithError
 
 parent_path = '..\A3/textfiles'
 IO_monthly_files = ['_nh', '_out.nh', '_ns', '_out.ns', '_sh', '_out.sh', '_tropical', '_out.tropical']
@@ -10,7 +10,7 @@ list_tuples = makeList(data_file)
 
 # plotList('DEAD!', list_tuples, 'r', 'DEAD I', 'DEAD II')
 #
-# plt.savefig('..\A3/images/test.png')
+plt.savefig('..\A3/images/test.png')
 
 # plt.show()
 
@@ -24,8 +24,8 @@ correctFile(fakedata, fakeoutput)
 #         return True
 #     return False
 
-
-for i in range(len(IO_monthly_files) - 1):
+n = len(IO_monthly_files)
+for i in range(n - 1):
     delete = False
     monthly_input = '\Data.monthly'
     monthly_output = '/Parsed.monthly'
@@ -34,7 +34,7 @@ for i in range(len(IO_monthly_files) - 1):
     output_file_index = 2 * i - 1
     if input_file_index < 0 and output_file_index < 0:
         continue
-    if input_file_index > len(IO_monthly_files) or output_file_index > len(IO_monthly_files):
+    if input_file_index > n or output_file_index > n:
         break
 
         # print("File, I:O -> {}:{}".format(IO_monthly_files[input_file_index],
@@ -50,16 +50,12 @@ for i in range(len(IO_monthly_files) - 1):
     #     print("FILE: {} --> {}".format(output_file, removefile(output_file)))
     #     print('\n')
 
-# list1 = makeAverageList(parent_path + '\Parsed.monthly_out.nh.txt', 0, 1, 4)
-# list2 = makeAverageList(parent_path + '\Parsed.monthly_out.ns.txt', 0, 1, 12)
-list3 = makeAverageList(parent_path + '\Parsed.monthly_out.ns.txt', 0, 4, 12)
+list1 = makeAverageList(parent_path + '\Parsed.monthly_out.nh.txt', 0, 2, 4)
+list2 = makeAverageList(parent_path + '\Parsed.monthly_out.nh.txt', 0, 9, 4)
+list3 = makeAverageList(parent_path + '\Parsed.monthly_out.nh.txt', 0, 10, 4)
 # plotList("Data1", list1, 'mo', 'x', 'y')
 # plotList("Data2", list2, 'ko', 'x', 'y')
-plotList("Data3", list3, 'ro', 'x', 'y')
+# plotList("Data3", list3, 'ro', 'x', 'y')
+plotWithError('', 'uncertainty', list1, list2, list3, 'k', 'r', 'x', 'y')
 plt.show()
 
-
-
-# lines = [line.rstrip('\n') for line in f]
-# for line in lines:
-#     print(line)

@@ -29,43 +29,44 @@ for i in range(n - 1):
     if input_file_index > n or output_file_index > n:
         break
 
-        # print("File, I:O -> {}:{}".format(IO_monthly_files[input_file_index],
-        # IO_monthly_files[output_file_index]))
     input_file = parent_path + monthly_input + IO_monthly_files[input_file_index] + '.txt'
     output_file = parent_path + monthly_output + IO_monthly_files[output_file_index] + '.txt'
 
-    # print("INPUT:OUTPUT -->> {}:{}".format(input_file, output_file))
     success = correctFile(input_file, output_file)
-    # print("FILE: {} --> {}".format(input_file, success))
 
-# def randomColor(index):
-#     letters = ['b', 'm', 'o', 'r', 'k']
-#     return letters[index]
+months = 48
+dark = 'darkcyan'
+medium = 'c'
+bright = 'aqua'
 
-months = 12
-list1 = makeAverageList(parent_path + '\Parsed.monthly_out.nh.txt', 0, 2, months)
-list2 = makeAverageList(parent_path + '\Parsed.monthly_out.ns.txt', 0, 2, months)
-list3 = makeAverageList(parent_path + '\Parsed.monthly_out.sh.txt', 0, 2, months)
-list4 = makeAverageList(parent_path + '\Parsed.monthly_out.tropical.txt', 0, 2, months)
+list_nh = makeAverageList(parent_path + '\Parsed.monthly_out.nh.txt', 0, 2, months)
+list_nh1 = makeAverageList(parent_path + '\Parsed.monthly_out.nh.txt', 0, 2, months)
+list_nh2 = makeAverageList(parent_path + '\Parsed.monthly_out.nh.txt', 0, 2, months)
+list_nh3 = makeAverageList(parent_path + '\Parsed.monthly_out.nh.txt', 0, 2, months)
+list_nh4 = makeAverageList(parent_path + '\Parsed.monthly_out.nh.txt', 0, 2, months)
 
-plotList("nh", list1, 'mo', 'year', 'temp')
-plotList("ns", list2, 'ko', 'year', 'temp')
-plotList("sh", list3, 'ro', 'year', 'temp')
-plotList("Trpl", list4, 'bo', 'year', 'temp')
+list_ns = makeAverageList(parent_path + '\Parsed.monthly_out.ns.txt', 0, 2, months)
+list_ns1 = makeAverageList(parent_path + '\Parsed.monthly_out.ns.txt', 0, 2, months)
+list_ns2 = makeAverageList(parent_path + '\Parsed.monthly_out.ns.txt', 0, 2, months)
+list_ns3 = makeAverageList(parent_path + '\Parsed.monthly_out.ns.txt', 0, 2, months)
+list_ns4 = makeAverageList(parent_path + '\Parsed.monthly_out.ns.txt', 0, 2, months)
+
+list_sh = makeAverageList(parent_path + '\Parsed.monthly_out.sh.txt', 0, 2, months)
+list_sh1 = makeAverageList(parent_path + '\Parsed.monthly_out.sh.txt', 0, 2, months)
+list_sh2 = makeAverageList(parent_path + '\Parsed.monthly_out.sh.txt', 0, 2, months)
+list_sh3 = makeAverageList(parent_path + '\Parsed.monthly_out.sh.txt', 0, 2, months)
+list_sh4 = makeAverageList(parent_path + '\Parsed.monthly_out.sh.txt', 0, 2, months)
+
+list_trp = makeAverageList(parent_path + '\Parsed.monthly_out.tropical.txt', 0, 2, months)
+list_trp1 = makeAverageList(parent_path + '\Parsed.monthly_out.tropical.txt', 0, 2, months)
+list_trp2 = makeAverageList(parent_path + '\Parsed.monthly_out.tropical.txt', 0, 2, months)
+list_trp3 = makeAverageList(parent_path + '\Parsed.monthly_out.tropical.txt', 0, 2, months)
+list_trp4 = makeAverageList(parent_path + '\Parsed.monthly_out.tropical.txt', 0, 2, months)
+
+# plotList("nh", list1, 'mo', 'year', 'temp')
+# plotList("ns", list2, 'ko', 'year', 'temp')
+# plotList("sh", list3, 'ro', 'year', 'temp')
+# plotList("Trpl", listtrp, 'bo', 'year', 'temp')
 
 # plt.savefig('..\A3/images/A3part2aYear.png')
 plt.show()
-
-# print(len(IO_monthly_files))
-# for i in range(int(len(IO_monthly_files)/2)):
-#
-#     output_file = 2 * i - 1
-#     if output_file < 0:
-#         continue
-#     if output_file > int(len(IO_monthly_files)/2):
-#         break
-#     output_file = parent_path + monthly_output + IO_monthly_files[output_file] + '.txt'
-#
-#     list1 = makeAverageList(output_file, 0, 2, months)
-#     plotList("1", list1, 'ro' if i < 5 else randomColor(i), 'year', 'temp')
-#     del list1[:]

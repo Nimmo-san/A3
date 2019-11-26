@@ -14,7 +14,7 @@ def openFile(file_path, argument):
                 file = open(file_path, argument)
                 return file
             except FileNotFoundError:
-                return
+                return None
         print("Given argument: {} is invalid".format(argument))
     else:
         print("File {} could not be found!".format(file_path))
@@ -113,10 +113,8 @@ def split_date(data):
         newstring = str(int(dates[0])+float(rounded_month))
         # The old is replaced with the new string using a list comprehension
         split = [word.replace(date, newstring) for word in split]
-        # appended into the data
+        # appended into the data and return it
         altered_data.append(split)
-    # and returned
-    # print(altered_data)
     return altered_data
 
 
@@ -129,15 +127,6 @@ def write_tofile(data, file):
     return True
 
 
-# def divide_chunks(l, n):
-#     for i in range(0, len(l), n):
-#         yield l[i:i + n]
-
-
-def change_tuples(data):
-    return [tuple(element) for element in data]
-
-
 def divide_chunks(l, n):
     for i in range(0, len(l), n):
         yield l[i:i + n]
@@ -145,28 +134,23 @@ def divide_chunks(l, n):
 
 def makeAverageList(input_file, column_v1=0, column_v2=0, number_months=0):
     column1 = []
+    data_list = []
 
     file = openFile(input_file, 'r')
     lines = [line.rstrip('\n') for line in file]
     if not file.close():
         file.close()
 
-    # if len(lines) % number_months != 0:
-    #     print("Pick a value that evenly divides the data! {}".format(file.name))
-    #     # exit(1)
-
     for element in lines:
-        linessplit = element.split(',')
-        for i in range(len(linessplit)):
+        lines_split = element.split(',')
+        for i in range(len(lines_split)):
             if i == column_v1:
-                column1.append(linessplit[i])
+                column1.append(lines_split[i])
             elif i == column_v2:
-                column1.append(linessplit[i])
+                column1.append(lines_split[i])
             else:
                 pass
 
-    # print(column1)
-    data_list = []
     n = len(column1)
     for i in range(n):
         c1data = 2 * (i - 1)
@@ -205,15 +189,13 @@ def correctFile(input_file, output_file):
     data = []
     full_data = []
 
-    # Catches the error, rather than crash if the files don't exist
-    try:
-        toreadfile = open(input_file, 'r')
-        writefile = open(output_file, 'w')
-    except FileNotFoundError:
-        print("File, {} couldn't be found!".format(input_file))
+    toreadfile = openFile(input_file, 'r')
+    towritefile = openFile(output_file, 'w')
+    if toreadfile and towritefile:
+        pass
+    elif toreadfile and not towritefile:
         print("File, {} could't be found! \n File being created.".format(output_file))
-        writefile = open(output_file, 'w+')
-        exit(1)
+        towritefile = open(output_file, 'w')
 
     # Reads the data in the file
     lines = [line.rstrip('\n') for line in toreadfile]
@@ -221,17 +203,16 @@ def correctFile(input_file, output_file):
     removed_pattern = remove_pattern(lines)
     # Requests for the data to be split
     data = split_date(removed_pattern)
-    # print(data)
 
     # Iterates through joining each one
     for line in data:
         string1 = ','.join(line)
         full_data.append(string1)
 
-    success = write_tofile(full_data, writefile)
+    success = write_tofile(full_data, towritefile)
 
     toreadfile.close()
-    writefile.close()
+    towritefile.close()
     return success
 
 
@@ -239,14 +220,52 @@ def checkSize(n, m, l):
     return True if n == m and l == m else False
 
 
-def plotWithError(name, type_s, list_tuples, list_tuples2, list_tuples3, color1='mo', color2='ro', xname='X',
-                  yname='Y'):
+def change(list1):
+    return [list(element) for element in list1]
+
+
+def tofloat(list1):
+    return [float(i) for i in list1]
+
+
+#                                              UPPER VAR    LOWER VAR
+def plotWithError(name, type_s, list_tuples, list_tuples2, list_tuples3, color1='m0', color2='r', x_name='X',
+                  y_name='Y'):
     n = len(list_tuples)
     m = len(list_tuples2)
-    l = len(list_tuples3)
-    if checkSize(n, m, l):
+    k = len(list_tuples3)
+    if checkSize(n, m, k):
         pass
     else:
-        print("Size of list not equal: ", n, m, l)
+        print("Size of list not equal: ", n, m, k)
+        exit(1)
 
+    err_low_variation = []
+    err_upp_variation = []
+    x = []
+    y = []
+
+    for (xp, yp) in list_tuples:
+        x.append(xp)
+        y.append(yp)
+
+    for (xerr, yerr) in list_tuples2:
+        err_upp_variation.append(yerr)
+
+    for (xerr, yerr) in list_tuples3:
+        err_low_variation.append(yerr)
+
+    print(err_upp_variation)
+    print(err_low_variation)
+    print(x)
+
+    err_low_variation = tofloat(err_low_variation)
+    err_upp_variation = tofloat(err_upp_variation)
+    x = tofloat(x)
+
+    plt.fill_between(x, err_low_variation, err_upp_variation, color=color2, label=type_s)
+    plt.plot(x, y, color=color1, label=name)
+    plt.xlabel(x_name)
+    plt.ylabel(y_name)
+    plt.legend()
     return None
