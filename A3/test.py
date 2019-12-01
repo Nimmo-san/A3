@@ -1,32 +1,24 @@
 import matplotlib.pyplot as plt
 
-from functions import makeList, correctFile, makeAverageList, plotWithError
+from functions import makeList, plotList, correctFile, makeAverageList, plotWithError
 
 parent_path = '..\A3/textfiles'
 IO_monthly_files = ['_nh', '_out.nh', '_ns', '_out.ns', '_sh', '_out.sh', '_tropical', '_out.tropical']
+test_data = '..\A3/textfiles\FakeData.txt'
+test_output = '..\A3/textfiles/Here.txt'
 
 data_file = '..\A3/textfiles\Data.nh.txt'
 list_tuples = makeList(data_file)
 
-# plotList('DEAD!', list_tuples, 'r', 'DEAD I', 'DEAD II')
-#
+plotList('DEAD!', list_tuples, 'r', 'DEAD I', 'DEAD II')
 plt.savefig('..\A3/images/test.png')
+plt.show()
 
-# plt.show()
+correctFile(test_data, test_output)
 
-fakedata = '..\A3/textfiles\FakeData.txt'
-fakeoutput = '..\A3/textfiles/Here.txt'
-correctFile(fakedata, fakeoutput)
-
-# def removefile(file):
-#     if os.path.exists(file):
-#         os.remove(file)
-#         return True
-#     return False
 
 n = len(IO_monthly_files)
 for i in range(n - 1):
-    delete = False
     monthly_input = '\Data.monthly'
     monthly_output = '/Parsed.monthly'
 
@@ -44,11 +36,7 @@ for i in range(n - 1):
 
     # print("INPUT:OUTPUT -->> {}:{}".format(input_file, output_file))
     success = correctFile(input_file, output_file)
-    # print("FILE: {} --> {}".format(input_file, success))
 
-    # if delete:
-    #     print("FILE: {} --> {}".format(output_file, removefile(output_file)))
-    #     print('\n')
 
 list1 = makeAverageList(parent_path + '\Parsed.monthly_out.nh.txt', 0, 2, 4)
 list2 = makeAverageList(parent_path + '\Parsed.monthly_out.nh.txt', 0, 9, 4)
