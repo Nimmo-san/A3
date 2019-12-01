@@ -229,7 +229,7 @@ def tofloat(list1):
 
 
 #                                              UPPER VAR    LOWER VAR
-def plotWithError(name, type_s, list_tuples, list_tuples2, list_tuples3, color1='m0', color2='r', x_name='X',
+def plotWithError(name, type_s, list_tuples, list_tuples2, list_tuples3, color1='m', color2='r', x_name='X',
                   y_name='Y'):
     n = len(list_tuples)
     m = len(list_tuples2)

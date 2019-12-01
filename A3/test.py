@@ -37,13 +37,11 @@ for i in range(n - 1):
     # print("INPUT:OUTPUT -->> {}:{}".format(input_file, output_file))
     success = correctFile(input_file, output_file)
 
-
-list1 = makeAverageList(parent_path + '\Parsed.monthly_out.nh.txt', 0, 2, 4)
-list2 = makeAverageList(parent_path + '\Parsed.monthly_out.nh.txt', 0, 9, 4)
-list3 = makeAverageList(parent_path + '\Parsed.monthly_out.nh.txt', 0, 10, 4)
+list1 = makeAverageList(parent_path + '\Parsed.monthly_out.nh.txt', 0, 1, 4)
+list2 = makeAverageList(parent_path + '\Parsed.monthly_out.nh.txt', 0, 8, 4)
+list3 = makeAverageList(parent_path + '\Parsed.monthly_out.nh.txt', 0, 9, 4)
 # plotList("Data1", list1, 'mo', 'x', 'y')
 # plotList("Data2", list2, 'ko', 'x', 'y')
 # plotList("Data3", list3, 'ro', 'x', 'y')
 plotWithError('', 'uncertainty', list1, list2, list3, 'k', 'r', 'x', 'y')
 plt.show()
-
