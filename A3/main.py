@@ -3,7 +3,9 @@ import matplotlib.pyplot as plt
 from functions import plotList, makeList, correctFile, makeAverageList
 
 parent_path = '..\A3/textfiles'
-IO_monthly_files = ['_nh', '_out.nh', '_ns', '_out.ns', '_sh', '_out.sh', '_tropical', '_out.tropical']
+IO_monthly_files = ['_nh.txt', '_out.nh.txt', '_ns.txt',
+                    '_out.ns.txt', '_sh.txt', '_out.sh.txt',
+                    '_tropical.txt', '_out.tropical.txt']
 monthly_input = '\Data.monthly'
 monthly_output = '/Parsed.monthly'
 
@@ -17,10 +19,10 @@ plotList(name='Northern hemisphere', color='slateblue',
          list_tuples=tuples_list, xaxis='year', yaxis='temprature anomalies')
 # Saves the graph
 plt.savefig('..\A3/images/A3part1.png')
+plt.show()
 
 n = len(IO_monthly_files)
 for i in range(n - 1):
-
 
     input_file_index = 2 * (i - 1)
     output_file_index = 2 * i - 1
@@ -29,8 +31,8 @@ for i in range(n - 1):
     if input_file_index > n or output_file_index > n:
         break
 
-    input_file = parent_path + monthly_input + IO_monthly_files[input_file_index] + '.txt'
-    output_file = parent_path + monthly_output + IO_monthly_files[output_file_index] + '.txt'
+    input_file = parent_path + monthly_input + IO_monthly_files[input_file_index]
+    output_file = parent_path + monthly_output + IO_monthly_files[output_file_index]
 
     success = correctFile(input_file, output_file)
 
@@ -63,10 +65,28 @@ list_trp2 = makeAverageList(parent_path + '\Parsed.monthly_out.tropical.txt', 0,
 list_trp3 = makeAverageList(parent_path + '\Parsed.monthly_out.tropical.txt', 0, 2, months)
 list_trp4 = makeAverageList(parent_path + '\Parsed.monthly_out.tropical.txt', 0, 2, months)
 
-# plotList("nh", list1, 'mo', 'year', 'temp')
-# plotList("ns", list2, 'ko', 'year', 'temp')
-# plotList("sh", list3, 'ro', 'year', 'temp')
-# plotList("Trpl", listtrp, 'bo', 'year', 'temp')
+# plotWithError()
+# plotWithError()
+# plotWithError()
+# plotWithError()
+plt.show()
+
+# plotWithError()
+# plotWithError()
+# plotWithError()
+# plotWithError()
+plt.show()
+
+# plotWithError()
+# plotWithError()
+# plotWithError()
+# plotWithError()
+plt.show()
+
+# plotWithError()
+# plotWithError()
+# plotWithError()
+# plotWithError()
+plt.show()
 
 # plt.savefig('..\A3/images/A3part2aYear.png')
-plt.show()

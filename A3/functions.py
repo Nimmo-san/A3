@@ -255,10 +255,6 @@ def plotWithError(name, type_s, list_tuples, list_tuples2, list_tuples3, color1=
     for (xerr, yerr) in list_tuples3:
         err_low_variation.append(yerr)
 
-    print(err_upp_variation)
-    print(err_low_variation)
-    print(x)
-
     err_low_variation = tofloat(err_low_variation)
     err_upp_variation = tofloat(err_upp_variation)
     x = tofloat(x)
@@ -268,4 +264,4 @@ def plotWithError(name, type_s, list_tuples, list_tuples2, list_tuples3, color1=
     plt.xlabel(x_name)
     plt.ylabel(y_name)
     plt.legend()
-    return None
+    return
