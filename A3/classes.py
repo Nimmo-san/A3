@@ -32,3 +32,6 @@ class Analysis:
 
     def updateLists(self, tuple_columns, granularity=0, type_='', type_2='', min_=0, max_=0):
         return
+
+    def scatterPlot(one, two, color='m'):
+        return
