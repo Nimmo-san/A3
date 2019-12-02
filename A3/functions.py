@@ -132,6 +132,18 @@ def divide_chunks(l, n):
         yield l[i:i + n]
 
 
+def checkSize(n, m, l):
+    return True if n == m and l == m else False
+
+
+def change(list1):
+    return [list(element) for element in list1]
+
+
+def tofloat(list1):
+    return [float(i) for i in list1]
+
+
 def makeAverageList(input_file, column_v1=0, column_v2=0, number_months=0):
     column1 = []
     data_list = []
@@ -215,19 +227,6 @@ def correctFile(input_file, output_file):
     towritefile.close()
     return success
 
-
-def checkSize(n, m, l):
-    return True if n == m and l == m else False
-
-
-def change(list1):
-    return [list(element) for element in list1]
-
-
-def tofloat(list1):
-    return [float(i) for i in list1]
-
-
 #                                              UPPER VAR    LOWER VAR
 def plotWithError(name, type_s, list_tuples, list_tuples2, list_tuples3, color1='m', color2='r', x_name='X',
                   y_name='Y'):
@@ -260,8 +259,8 @@ def plotWithError(name, type_s, list_tuples, list_tuples2, list_tuples3, color1=
     x = tofloat(x)
 
     plt.fill_between(x, err_low_variation, err_upp_variation, color=color2, label=type_s)
+    plt.legend()
     plt.plot(x, y, color=color1, label=name)
     plt.xlabel(x_name)
     plt.ylabel(y_name)
-    plt.legend()
     return

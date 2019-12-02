@@ -1,11 +1,14 @@
 import matplotlib.pyplot as plt
 
+from classes import Analysis
 from functions import makeList, plotList, correctFile, makeAverageList, plotWithError
 
 parent_path = '..\A3/textfiles'
-IO_monthly_files = ['_nh', '_out.nh', '_ns', '_out.ns', '_sh', '_out.sh', '_tropical', '_out.tropical']
+IO_monthly_files = ['_nh', '_out.nh', '_ns', '_out.ns', '_sh', '_out.sh', '_tropical', '_out.tr']
 test_data = '..\A3/textfiles\FakeData.txt'
 test_output = '..\A3/textfiles/Here.txt'
+monthly_input = '\Data.monthly'
+monthly_output = '/Parsed.monthly'
 
 data_file = '..\A3/textfiles\Data.nh.txt'
 list_tuples = makeList(data_file)
@@ -19,8 +22,6 @@ correctFile(test_data, test_output)
 
 n = len(IO_monthly_files)
 for i in range(n - 1):
-    monthly_input = '\Data.monthly'
-    monthly_output = '/Parsed.monthly'
 
     input_file_index = 2 * (i - 1)
     output_file_index = 2 * i - 1
@@ -45,3 +46,18 @@ list3 = makeAverageList(parent_path + '\Parsed.monthly_out.nh.txt', 0, 9, 4)
 # plotList("Data3", list3, 'ro', 'x', 'y')
 plotWithError('', 'uncertainty', list1, list2, list3, 'k', 'r', 'x', 'y')
 plt.show()
+
+ana = Analysis()
+
+for i in range(n - 1):
+    output_file_index = 2 * i - 1
+    if output_file_index < 0:
+        continue
+    if output_file_index > n:
+        break
+
+    ana.addFile(parent_path + monthly_output + IO_monthly_files[output_file_index],
+                IO_monthly_files[output_file_index][-2:])
+    ana.updateLists((0, 2, 4, 6, 8, 10), 12, 'nhu', 'nhu2', 1, 6)
+
+ana.printLists()

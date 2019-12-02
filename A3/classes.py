@@ -7,6 +7,7 @@ class Analysis:
         self.list_tuples = []
         self.list_uncertainty1 = []
         self.list_uncertainty2 = []
+        self.colors = {'d': 'm', 'me': 'fuchsia', 'l': 'magenta', 'vl': 'orchid'}
 
     def addFile(self, input_file, title):
         if input_file and title:
@@ -16,11 +17,11 @@ class Analysis:
     def printLists(self):
         print("input_file data:")
         for data in self.input_files:
-            print('->' + data)
+            print('-> ' + data)
 
         print("\ntitles data:")
         for data in self.titles:
-            print('->' + data)
+            print('-> ' + data)
 
     def plotListTuples(self):
         x = []
@@ -31,7 +32,15 @@ class Analysis:
             y.append(yp)
 
     def updateLists(self, tuple_columns, granularity=0, type_='', type_2='', min_=0, max_=0):
+        opened_Files = []
+        for i in self.input_files:
+            file = open(i + '.txt', 'r')
+            opened_Files.append(file)
+
+        print(opened_Files)
+        print(tuple_columns)
+
         return
 
-    def scatterPlot(one, two, color='m'):
+    def scatterPlot(self, one, two, color='m'):
         return
