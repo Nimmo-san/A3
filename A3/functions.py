@@ -21,49 +21,6 @@ def openFile(file_path, argument):
     return file
 
 
-def makeList(data_full_path):
-    # print(data_full_path)
-    full_list = []
-    # Checks if the file exists or not
-    f = openFile(data_full_path, 'r')
-    if f == None:
-        exit(1)
-
-    # Reads the data from the list and appends it to a list
-    lines = [line.rstrip('\n') for line in f]
-    f.close()
-    # Iteration through the data and splits by a space
-    for line in lines:
-        try:
-            split = line.split(' ')
-        except:
-            pass
-        # Saves it to a tuple to be appended to a list
-        year_data_tuple = (split[0], split[1])
-        full_list.append(year_data_tuple)
-    # Checks if list is empty, if not it returns the list
-    return full_list if len(full_list) != 0 else None
-
-
-def plotList(name, list_tuples, color, xaxis, yaxis):
-    """ Plots a given list into a screen with the passed in arguments """
-    # Creates new empty lists for the x and y axis respectively
-    x = []
-    y = []
-    # Goes through the list of tuples
-    # And appends it to its corresponding list
-    for (xp, yp) in list_tuples:
-        x.append(xp)
-        y.append(yp)
-    # Plots a 2-dimensional graph
-    # With the corresponding values of x and y
-    plt.plot(x, y, color, label=name, markersize=2)
-    # Shows the legend, which is the label name in the argument
-    plt.xlabel(xaxis)
-    plt.ylabel(yaxis)
-    plt.legend()
-
-
 def _removePattern(data):
     """ Removes spaces from the given data """
     removed_pattern = []
@@ -147,7 +104,7 @@ def change(list_):
     return [list(element) for element in list_]
 
 
-def tofloat(list_):
+def _tofloat(list_):
     """ Changes a list of strings into floats using the float function"""
     return [float(i) for i in list_]
 
@@ -197,6 +154,50 @@ def _retrieve(list_):
         # appends it to the list and is returned
         list_data.append(tuple_)
     return list_data
+
+
+def makeList(data_full_path):
+    # print(data_full_path)
+    full_list = []
+    argument = ' '
+    # Checks if the file exists or not
+    f = openFile(data_full_path, 'r')
+    if not f:
+        exit(1)
+
+    # Reads the data from the list and appends it to a list
+    lines = [line.rstrip('\n') for line in f]
+    f.close()
+    # Iteration through the data and splits by a space
+    for line in lines:
+        try:
+            split = line.split(argument)
+        except:
+            pass
+        # Saves it to a tuple to be appended to a list
+        year_data_tuple = (split[0], split[1])
+        full_list.append(year_data_tuple)
+    # Checks if list is empty, if not it returns the list
+    return full_list if len(full_list) != 0 else None
+
+
+def plotList(name, list_tuples, color, xaxis, yaxis):
+    """ Plots a given list into a screen with the passed in arguments """
+    # Creates new empty lists for the x and y axis respectively
+    x = []
+    y = []
+    # Goes through the list of tuples
+    # And appends it to its corresponding list
+    for (xp, yp) in list_tuples:
+        x.append(xp)
+        y.append(yp)
+    # Plots a 2-dimensional graph
+    # With the corresponding values of x and y
+    plt.plot(x, y, color, label=name, markersize=2)
+    # Shows the legend, which is the label name in the argument
+    plt.xlabel(xaxis)
+    plt.ylabel(yaxis)
+    plt.legend()
 
 
 def makeAverageList(input_file, column_v1=0, column_v2=0, number_months=0):
@@ -285,9 +286,9 @@ def plotWithError(name, type_s, list_tuples, list_tuples2, list_tuples3, color1=
     for (xerr, yerr) in list_tuples3:
         err_low_variation.append(yerr)
 
-    err_low_variation = tofloat(err_low_variation)
-    err_upp_variation = tofloat(err_upp_variation)
-    x = tofloat(x)
+    err_low_variation = _tofloat(err_low_variation)
+    err_upp_variation = _tofloat(err_upp_variation)
+    x = _tofloat(x)
 
     plt.fill_between(x, err_low_variation, err_upp_variation, color=color2, label=type_s)
     plt.legend()
