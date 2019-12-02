@@ -15,13 +15,9 @@ class Analysis:
             self.titles.append(title)
 
     def printLists(self):
-        print("input_file data:")
-        for data in self.input_files:
-            print('-> ' + data)
-
-        print("\ntitles data:")
-        for data in self.titles:
-            print('-> ' + data)
+        print("\nInput files, titles: \n")
+        for data in range(len(self.input_files)):
+            print(" -> {}.txt, {}".format(self.input_files[data], self.titles[data]))
 
     def plotListTuples(self):
         x = []

@@ -22,6 +22,8 @@ plotList(name='Northern hemisphere', color='slateblue',
 plt.savefig('..\A3/images/A3part1.png')
 plt.show()
 
+# Iterates through the files stored
+# and aplies the correctFile function
 n = len(IO_monthly_files)
 for i in range(n - 1):
 
@@ -37,8 +39,10 @@ for i in range(n - 1):
 
     success = correctFile(input_file, output_file)
 
+# Granularity of months
 months = 48
 
+# List for each data set
 list_nh = makeAverageList(parent_path + '\Parsed.monthly_out.nh.txt', 0, 1, months)
 list_nh1 = makeAverageList(parent_path + '\Parsed.monthly_out.nh.txt', 0, 8, months)
 list_nh2 = makeAverageList(parent_path + '\Parsed.monthly_out.nh.txt', 0, 9, months)
@@ -63,9 +67,12 @@ list_trp2 = makeAverageList(parent_path + '\Parsed.monthly_out.tropical.txt', 0,
 list_trp3 = makeAverageList(parent_path + '\Parsed.monthly_out.tropical.txt', 0, 10, months)
 list_trp4 = makeAverageList(parent_path + '\Parsed.monthly_out.tropical.txt', 0, 11, months)
 
+# Invokes the function to plot with the corresponding variation
 plotWithError('nh', 'nhu1', list_nh, list_nh3, list_nh4, colors[1], colors[3], 'time(years)', 'temp(c)')
 plotWithError('nh', 'nhu2', list_nh, list_nh1, list_nh2, colors[1], colors[2], 'time(years)', 'temp(c)')
+# Saves the figure into an image
 plt.savefig('..\A3/images/A3part2b.png')
+# Displays the plot
 plt.show()
 
 plotWithError('ns', 'nsu1', list_ns, list_ns3, list_ns4, colors[1], colors[3], 'time(years)', 'temp(c)')
@@ -82,5 +89,3 @@ plotWithError('trp', 'trpu1', list_trp, list_trp3, list_trp4, colors[1], colors[
 plotWithError('trp', 'trpu2', list_trp, list_trp1, list_trp2, colors[1], colors[2], 'time(years)', 'temp(c)')
 plt.savefig('..\A3/images/A3part2e.png')
 plt.show()
-
-# plt.savefig('..\A3/images/A3part2aYear.png')

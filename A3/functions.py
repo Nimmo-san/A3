@@ -205,11 +205,14 @@ def makeAverageList(input_file, column_v1=0, column_v2=0, number_months=0):
     a granularity of months """
     columns_ = []
 
+    # Opens a file and read the data of the file into a list
     file = openFile(input_file, 'r')
     lines = [line.rstrip('\n') for line in file]
+    # Closes the file if not closed
     if not file.close():
         file.close()
 
+    # Iterates the data and appends it to a list if the columns are found
     for element in lines:
         lines_split = element.split(',')
         for i in range(len(lines_split)):
@@ -218,9 +221,13 @@ def makeAverageList(input_file, column_v1=0, column_v2=0, number_months=0):
             else:
                 pass
 
+    # Requests the data to be retrieved from the list
+    # And divides it into chunks
     data_list = _retrieve(columns_)
     list1 = list(list_into_chunks(data_list, number_months))
+    # Asks the functions to average over the data
     average_list = _average(list1)
+    # Returns the data
     return average_list
 
 
@@ -231,30 +238,30 @@ def correctFile(input_file, output_file):
     data = []
     full_data = []
 
-    toreadfile = openFile(input_file, 'r')
-    towritefile = openFile(output_file, 'w')
-    if toreadfile and towritefile:
+    _readfile = openFile(input_file, 'r')
+    _writefile = openFile(output_file, 'w')
+    if _readfile and _writefile:
         pass
-    elif toreadfile and not towritefile:
+    elif _readfile and not _writefile:
         print("File, {} could't be found! \n File being created.".format(output_file))
-        towritefile = open(output_file, 'w')
+        _writefile = open(output_file, 'w')
 
     # Reads the data in the file and closes it
-    lines = [line.rstrip('\n') for line in toreadfile]
-    toreadfile.close()
+    lines = [line.rstrip('\n') for line in _readfile]
+    _readfile.close()
     # Asks the function to remove the pattern
     removed_pattern = _removePattern(lines)
     # Requests for the data to be split
     data = _dateSplit(removed_pattern, ',')
 
-    # Iterates through joining each one
+    # Iterates through to join each one with a comma
     for line in data:
-        string1 = ','.join(line)
-        full_data.append(string1)
+        string_ = ','.join(line)
+        full_data.append(string_)
 
-    success = write_tofile(full_data, towritefile)
-
-    towritefile.close()
+    success = write_tofile(full_data, _writefile)
+    # Closes the file
+    _writefile.close()
     return success
 
 #                                              UPPER VAR    LOWER VAR
@@ -262,19 +269,20 @@ def plotWithError(name, type_s, list_tuples, list_tuples2, list_tuples3, color1=
                   y_name='Y'):
     """ It plots lists of tuples with the nominal values and their corresponding
     lower and upper variation """
+    err_low_variation = []
+    err_upp_variation = []
+    x = []
+    y = []
+    # The corresponding length of each list is stored to be checked
     n = len(list_tuples)
     m = len(list_tuples2)
     k = len(list_tuples3)
     if checkSize(n, m, k):
         pass
     else:
+        # Exits if not
         print("Size of list not equal: ", n, m, k)
         exit(1)
-
-    err_low_variation = []
-    err_upp_variation = []
-    x = []
-    y = []
 
     for (xp, yp) in list_tuples:
         x.append(xp)
@@ -286,13 +294,18 @@ def plotWithError(name, type_s, list_tuples, list_tuples2, list_tuples3, color1=
     for (xerr, yerr) in list_tuples3:
         err_low_variation.append(yerr)
 
+    # Converted to floats to be drawn to the screen
     err_low_variation = _tofloat(err_low_variation)
     err_upp_variation = _tofloat(err_upp_variation)
     x = _tofloat(x)
 
+    # fill_between used to draw the error bands
     plt.fill_between(x, err_low_variation, err_upp_variation, color=color2, label=type_s)
+    # Shows the legend
     plt.legend()
+    # Plots the nominal curve
     plt.plot(x, y, color=color1, label=name)
+    # Labels the x and y-axis
     plt.xlabel(x_name)
     plt.ylabel(y_name)
     return
