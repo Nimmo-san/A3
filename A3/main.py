@@ -72,11 +72,11 @@ plotWithError('ns', 'nsu2', list_ns, list_ns1, list_ns2, colors[1], colors[2])
 plt.show()
 
 plotWithError('sh', 'shu1', list_sh, list_sh3, list_sh4, colors[1], colors[3])
-plotWithError('sh', 'shu1', list_sh, list_sh1, list_sh2, colors[1], colors[2])
+plotWithError('sh', 'shu2', list_sh, list_sh1, list_sh2, colors[1], colors[2])
 plt.show()
 
 plotWithError('trp', 'trpu1', list_trp, list_trp3, list_trp4, colors[1], colors[3])
-plotWithError('trp', 'trpu1', list_trp, list_trp1, list_trp2, colors[1], colors[2])
+plotWithError('trp', 'trpu2', list_trp, list_trp1, list_trp2, colors[1], colors[2])
 plt.show()
 
 # plt.savefig('..\A3/images/A3part2aYear.png')
