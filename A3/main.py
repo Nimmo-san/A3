@@ -63,20 +63,24 @@ list_trp2 = makeAverageList(parent_path + '\Parsed.monthly_out.tropical.txt', 0,
 list_trp3 = makeAverageList(parent_path + '\Parsed.monthly_out.tropical.txt', 0, 10, months)
 list_trp4 = makeAverageList(parent_path + '\Parsed.monthly_out.tropical.txt', 0, 11, months)
 
-plotWithError('nh', 'nhu1', list_nh, list_nh3, list_nh4, colors[1], colors[3])
-plotWithError('nh', 'nhu2', list_nh, list_nh1, list_nh2, colors[1], colors[2])
+plotWithError('nh', 'nhu1', list_nh, list_nh3, list_nh4, colors[1], colors[3], 'time(years)', 'temp(c)')
+plotWithError('nh', 'nhu2', list_nh, list_nh1, list_nh2, colors[1], colors[2], 'time(years)', 'temp(c)')
+plt.savefig('..\A3/images/A3part2b.png')
 plt.show()
 
-plotWithError('ns', 'nsu1', list_ns, list_ns3, list_ns4, colors[1], colors[3])
-plotWithError('ns', 'nsu2', list_ns, list_ns1, list_ns2, colors[1], colors[2])
+plotWithError('ns', 'nsu1', list_ns, list_ns3, list_ns4, colors[1], colors[3], 'time(years)', 'temp(c)')
+plotWithError('ns', 'nsu2', list_ns, list_ns1, list_ns2, colors[1], colors[2], 'time(years)', 'temp(c)')
+plt.savefig('..\A3/images/A3part2c.png')
 plt.show()
 
-plotWithError('sh', 'shu1', list_sh, list_sh3, list_sh4, colors[1], colors[3])
-plotWithError('sh', 'shu1', list_sh, list_sh1, list_sh2, colors[1], colors[2])
+plotWithError('sh', 'shu1', list_sh, list_sh3, list_sh4, colors[1], colors[3], 'time(years)', 'temp(c)')
+plotWithError('sh', 'shu2', list_sh, list_sh1, list_sh2, colors[1], colors[2], 'time(years)', 'temp(c)')
+plt.savefig('..\A3/images/A3part2d.png')
 plt.show()
 
-plotWithError('trp', 'trpu1', list_trp, list_trp3, list_trp4, colors[1], colors[3])
-plotWithError('trp', 'trpu1', list_trp, list_trp1, list_trp2, colors[1], colors[2])
+plotWithError('trp', 'trpu1', list_trp, list_trp3, list_trp4, colors[1], colors[3], 'time(years)', 'temp(c)')
+plotWithError('trp', 'trpu2', list_trp, list_trp1, list_trp2, colors[1], colors[2], 'time(years)', 'temp(c)')
+plt.savefig('..\A3/images/A3part2e.png')
 plt.show()
 
 # plt.savefig('..\A3/images/A3part2aYear.png')

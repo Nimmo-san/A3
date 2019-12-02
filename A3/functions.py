@@ -46,6 +46,7 @@ def makeList(data_full_path):
 
 
 def plotList(name, list_tuples, color, xaxis, yaxis):
+    """ Plots a given list into a screen with the passed in arguments """
     # Creates new empty lists for the x and y axis respectively
     x = []
     y = []
@@ -63,7 +64,8 @@ def plotList(name, list_tuples, color, xaxis, yaxis):
     plt.legend()
 
 
-def remove_pattern(data):
+def _removePattern(data):
+    """ Removes spaces from the given data """
     removed_pattern = []
     # Checks if the data is null
     if len(data) <= 0:
@@ -79,11 +81,12 @@ def remove_pattern(data):
         except:
             pass
         removed_pattern.append(string)
-    # Then return the data after
+    # Then returns the data after
     return removed_pattern
 
 
-def split_date(data):
+def _dateSplit(data, argument):
+    """ Splits a given data by some argument """
     altered_data = []
     # Checks if data is null
     if len(data) <= 0:
@@ -94,7 +97,7 @@ def split_date(data):
     # Iterates through the data
     for line in data:
         # Splitting each line of the data
-        split = line.split(',')
+        split = line.split(argument)
         try:
             # Accessing the data from the index 0 till 7
             # Assuming date is always between index 0 and 7
@@ -119,6 +122,7 @@ def split_date(data):
 
 
 def write_tofile(data, file):
+    """ Opens a file and writes the passed in data to a file """
     if len(data) <= 0:
         return False
 
@@ -127,26 +131,78 @@ def write_tofile(data, file):
     return True
 
 
-def divide_chunks(l, n):
-    for i in range(0, len(l), n):
-        yield l[i:i + n]
+def list_into_chunks(list_, offset):
+    """ Divides a list into smaller chunks using the yield function """
+    for i in range(0, len(list_), offset):
+        yield list_[i:i + offset]
 
 
 def checkSize(n, m, l):
+    """ Checks if the given integers are equal to one another """
     return True if n == m and l == m else False
 
 
-def change(list1):
-    return [list(element) for element in list1]
+def change(list_):
+    """ Changes some elements into lists, in here its changing tuples into lists """
+    return [list(element) for element in list_]
 
 
-def tofloat(list1):
-    return [float(i) for i in list1]
+def tofloat(list_):
+    """ Changes a list of strings into floats using the float function"""
+    return [float(i) for i in list_]
+
+
+def _average(list_):
+    """ It calculates the average of a given list of tuples """
+    average_list = []
+    # Iterates through the list
+    for line in list_:
+        sum1 = 0
+        average1 = 0
+        sum2 = 0
+        average2 = 0
+        i = 0
+        j = 0
+        # Iterates through each data in the list
+        while len(line) - i != 0 and len(line[i]) - j != 0:
+            sum1 = sum1 + float(line[i][j])
+            average1 = sum1 / len(line)
+            sum2 = sum2 + float(line[i][j + 1])
+            average2 = sum2 / len(line)
+            i += 1
+        # It formats the averges and adds them into the list to be returned
+        tuple1 = ("{:5.3f}".format(average1), "{:5.3f}".format(average2))
+        average_list.append(tuple1)
+    return average_list
+
+
+def _retrieve(list_):
+    """ Makes a list of tuples with the desired elements in the list """
+    list_data = []
+    size = len(list_)
+    # Iterates through the list, using an even and odd number generator
+    for i in range(size):
+        # even index stored in the list_ are x-axis values and odd numbers
+        # are y-axis values
+        c1data = 2 * (i - 1)
+        c2data = (2 * i) - 1
+
+        # Checks if there is any values out of bounds
+        # if not continue and break respectively
+        if c1data < 0 or c2data < 0:
+            continue
+        if c1data > size or c2data > size:
+            break
+        tuple_ = (list_[c1data], list_[c2data])
+        # appends it to the list and is returned
+        list_data.append(tuple_)
+    return list_data
 
 
 def makeAverageList(input_file, column_v1=0, column_v2=0, number_months=0):
-    column1 = []
-    data_list = []
+    """ It makes averages lists given the file and the columns to average over using
+    a granularity of months """
+    columns_ = []
 
     file = openFile(input_file, 'r')
     lines = [line.rstrip('\n') for line in file]
@@ -156,47 +212,20 @@ def makeAverageList(input_file, column_v1=0, column_v2=0, number_months=0):
     for element in lines:
         lines_split = element.split(',')
         for i in range(len(lines_split)):
-            if i == column_v1:
-                column1.append(lines_split[i])
-            elif i == column_v2:
-                column1.append(lines_split[i])
+            if i == column_v1 or i == column_v2:
+                columns_.append(lines_split[i])
             else:
                 pass
 
-    n = len(column1)
-    for i in range(n):
-        c1data = 2 * (i - 1)
-        c2data = (2 * i) - 1
-
-        if c1data < 0 or c2data < 0:
-            continue
-        if c1data > n or c2data > n:
-            break
-        tuple1 = (column1[c1data], column1[c2data])
-        data_list.append(tuple1)
-
-    list1 = list(divide_chunks(data_list, number_months))
-    ave_list = []
-
-    for line in list1:
-        sum1 = 0
-        average1 = 0
-        sum2 = 0
-        average2 = 0
-        i = 0
-        j = 0
-        while len(line) - i != 0 and len(line[i]) - j != 0:
-            sum1 = sum1 + float(line[i][j])
-            average1 = sum1 / len(line)
-            sum2 = sum2 + float(line[i][j + 1])
-            average2 = sum2 / len(line)
-            i += 1
-        tuple1 = ("{:5.3f}".format(average1), "{:5.3f}".format(average2))
-        ave_list.append(tuple1)
-    return ave_list
+    data_list = _retrieve(columns_)
+    list1 = list(list_into_chunks(data_list, number_months))
+    average_list = _average(list1)
+    return average_list
 
 
 def correctFile(input_file, output_file):
+    """ Corrects a passed in file and by removing the unnecessary characters
+    from the file and appends it to a new file """
     removed_pattern = []
     data = []
     full_data = []
@@ -209,12 +238,13 @@ def correctFile(input_file, output_file):
         print("File, {} could't be found! \n File being created.".format(output_file))
         towritefile = open(output_file, 'w')
 
-    # Reads the data in the file
+    # Reads the data in the file and closes it
     lines = [line.rstrip('\n') for line in toreadfile]
+    toreadfile.close()
     # Asks the function to remove the pattern
-    removed_pattern = remove_pattern(lines)
+    removed_pattern = _removePattern(lines)
     # Requests for the data to be split
-    data = split_date(removed_pattern)
+    data = _dateSplit(removed_pattern, ',')
 
     # Iterates through joining each one
     for line in data:
@@ -223,13 +253,14 @@ def correctFile(input_file, output_file):
 
     success = write_tofile(full_data, towritefile)
 
-    toreadfile.close()
     towritefile.close()
     return success
 
 #                                              UPPER VAR    LOWER VAR
 def plotWithError(name, type_s, list_tuples, list_tuples2, list_tuples3, color1='m', color2='r', x_name='X',
                   y_name='Y'):
+    """ It plots lists of tuples with the nominal values and their corresponding
+    lower and upper variation """
     n = len(list_tuples)
     m = len(list_tuples2)
     k = len(list_tuples3)
