@@ -265,6 +265,7 @@ def correctFile(input_file, output_file):
     _writefile.close()
     return success
 
+
 #                                              UPPER VAR    LOWER VAR
 def plotWithError(name, type_s, list_tuples, list_tuples2, list_tuples3, color1='m', color2='r', x_name='X',
                   y_name='Y'):

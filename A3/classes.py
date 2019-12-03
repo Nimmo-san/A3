@@ -34,8 +34,20 @@ class Analysis:
             file = open(i + '.txt', 'r')
             opened_Files.append(file)
 
-
         return
+
+    def _retrieveData(data, tuple_, gra, min_, max_):
+        list_ = []
+        # list_ = func(data, (0,1,8,9,10,11), 3, 0, 4)
+        if min_ >= 0 and max_ <= len(data):
+            for elem in range(min_, max_, 1):
+                split = data[elem].split(',')
+                for j in range(len(split)):
+                    if j in tuple_:
+                        list_.append(split[j])
+        else:
+            print(min_, max_, "Out of bounds!")
+        return list_
 
     def scatterPlot(self, one, two, color='m'):
         return
