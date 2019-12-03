@@ -157,6 +157,7 @@ def _retrieve(list_):
 
 
 def makeList(data_full_path):
+    """ Makes a list of the data with the given file path, passed in as argument """
     # print(data_full_path)
     full_list = []
     argument = ' '
@@ -280,7 +281,7 @@ def plotWithError(name, type_s, list_tuples, list_tuples2, list_tuples3, color1=
     if checkSize(n, m, k):
         pass
     else:
-        # Exits if not
+        # Exits if all values are not equal
         print("Size of list not equal: ", n, m, k)
         exit(1)
 
@@ -301,7 +302,7 @@ def plotWithError(name, type_s, list_tuples, list_tuples2, list_tuples3, color1=
 
     # fill_between used to draw the error bands
     plt.fill_between(x, err_low_variation, err_upp_variation, color=color2, label=type_s)
-    # Shows the legend
+    # Shows the legend before the nominal curve
     plt.legend()
     # Plots the nominal curve
     plt.plot(x, y, color=color1, label=name)

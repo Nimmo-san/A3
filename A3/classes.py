@@ -29,12 +29,11 @@ class Analysis:
 
     def updateLists(self, tuple_columns, granularity=0, type_='', type_2='', min_=0, max_=0):
         opened_Files = []
+        files_data = []
         for i in self.input_files:
             file = open(i + '.txt', 'r')
             opened_Files.append(file)
 
-        print(opened_Files)
-        print(tuple_columns)
 
         return
 

@@ -60,16 +60,18 @@ plt.show()
 ana = Analysis()
 
 # Iterates through it and adds the output function to the input file
-for i in range(n - 1):
-    output_file_index = 2 * i - 1
-    if output_file_index < 0:
-        continue
-    if output_file_index > n:
-        break
+# for i in range(n - 1):
+#     output_file_index = 2 * i - 1
+#     if output_file_index < 0:
+#         continue
+#     if output_file_index > n:
+#         break
     # Invokes the addFile and updateLists function for each input file
-    ana.addFile(parent_path + monthly_output + IO_monthly_files[output_file_index],
-                IO_monthly_files[output_file_index][-2:])
-    ana.updateLists((0, 2, 4, 6, 8, 10), 12, 'nhu', 'nhu2', 1, 6)
+# ana.addFile(parent_path + monthly_output + IO_monthly_files[output_file_index],
+#             IO_monthly_files[output_file_index][-2:])
+# ana.updateLists((0, 2, 4, 6, 8, 10), 12, 'nhu', 'nhu2', 1, 6)
 
+ana.addFile(parent_path + '\Here', 're')
+ana.updateLists((0, 2, 4, 6, 8, 10), 3, 'Hu', 'Hu2', 1, 6)
 # Prints the corresponding input file and its title
-ana.printLists()
+# ana.printLists()
