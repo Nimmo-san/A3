@@ -5,7 +5,7 @@ from functions import plotList, makeList, correctFile, makeAverageList, plotWith
 parent_path = '..\A3/textfiles'
 IO_monthly_files = ['_nh.txt', '_out.nh.txt', '_ns.txt',
                     '_out.ns.txt', '_sh.txt', '_out.sh.txt',
-                    '_tropical.txt', '_out.tropical.txt']
+                    '_tropical.txt', '_out.tr.txt']
 monthly_input = '\Data.monthly'
 monthly_output = '/Parsed.monthly'
 colors = {1: 'darkcyan', 2: 'c', 3: 'aqua'}
@@ -61,11 +61,11 @@ list_sh2 = makeAverageList(parent_path + '\Parsed.monthly_out.sh.txt', 0, 9, mon
 list_sh3 = makeAverageList(parent_path + '\Parsed.monthly_out.sh.txt', 0, 10, months)
 list_sh4 = makeAverageList(parent_path + '\Parsed.monthly_out.sh.txt', 0, 11, months)
 
-list_trp = makeAverageList(parent_path + '\Parsed.monthly_out.tropical.txt', 0, 1, months)
-list_trp1 = makeAverageList(parent_path + '\Parsed.monthly_out.tropical.txt', 0, 8, months)
-list_trp2 = makeAverageList(parent_path + '\Parsed.monthly_out.tropical.txt', 0, 9, months)
-list_trp3 = makeAverageList(parent_path + '\Parsed.monthly_out.tropical.txt', 0, 10, months)
-list_trp4 = makeAverageList(parent_path + '\Parsed.monthly_out.tropical.txt', 0, 11, months)
+list_trp = makeAverageList(parent_path + '\Parsed.monthly_out.tr.txt', 0, 1, months)
+list_trp1 = makeAverageList(parent_path + '\Parsed.monthly_out.tr.txt', 0, 8, months)
+list_trp2 = makeAverageList(parent_path + '\Parsed.monthly_out.tr.txt', 0, 9, months)
+list_trp3 = makeAverageList(parent_path + '\Parsed.monthly_out.tr.txt', 0, 10, months)
+list_trp4 = makeAverageList(parent_path + '\Parsed.monthly_out.tr.txt', 0, 11, months)
 
 # Invokes the function to plot with the corresponding variation
 # Saves the figure into an image

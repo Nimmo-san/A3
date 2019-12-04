@@ -36,7 +36,11 @@ class Analysis:
 
         return
 
-    def _retrieveData(data, tuple_, gra, min_, max_):
+    def chunks(list_, offset):
+        for i in range(0, len(list_), offset):
+            yield list_[i:i + offset]
+
+    def _retrieveData(self, data, tuple_, min_, max_):
         list_ = []
         # list_ = func(data, (0,1,8,9,10,11), 3, 0, 4)
         if min_ >= 0 and max_ <= len(data):
@@ -47,6 +51,16 @@ class Analysis:
                         list_.append(split[j])
         else:
             print(min_, max_, "Out of bounds!")
+
+        list_1 = self.chunks(list_, 2)
+        size = len(list_1)
+        for i in range(1, size):
+            in1 = 3 * (i - 1)
+            in2 = 3 * i - 2
+            in3 = 3 * i - 1
+            if in1 > size or in2 > size or in3 > size:
+                break
+
         return list_
 
     def scatterPlot(self, one, two, color='m'):
