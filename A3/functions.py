@@ -127,7 +127,7 @@ def _average(list_):
             sum2 = sum2 + float(line[i][j + 1])
             average2 = sum2 / len(line)
             i += 1
-        # It formats the averges and adds them into the list to be returned
+        # It formats the averges and appends them into the list to be returned
         tuple1 = ("{:5.3f}".format(average1), "{:5.3f}".format(average2))
         average_list.append(tuple1)
     return average_list
