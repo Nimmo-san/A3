@@ -71,7 +71,8 @@ ana = Analysis()
 #             IO_monthly_files[output_file_index][-2:])
 # ana.updateLists((0, 2, 4, 6, 8, 10), 12, 'nhu', 'nhu2', 1, 6)
 
-ana.addFile(parent_path + '\Here', 're')
-ana.updateLists((0, 2, 4, 6, 8, 10), 3, 'Hu', 'Hu2', 1, 6)
-# Prints the corresponding input file and its title
-# ana.printLists()
+
+ana.addFile(parent_path + '\Parsed.monthly_out.nh', 'nh')
+print(ana.updateLists((0, 1, 8, 9, 10, 11), 2, 'Hu', 'Hu2', 0, 2000))
+
+ana.printLists()

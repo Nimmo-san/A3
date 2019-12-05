@@ -88,7 +88,7 @@ def write_tofile(data, file):
     return True
 
 
-def list_into_chunks(list_, offset):
+def _chunks(list_, offset):
     """ Divides a list into smaller chunks using the yield function """
     for i in range(0, len(list_), offset):
         yield list_[i:i + offset]
@@ -225,8 +225,9 @@ def makeAverageList(input_file, column_v1=0, column_v2=0, number_months=0):
     # Requests the data to be retrieved from the list
     # And divides it into chunks
     data_list = _retrieve(columns_)
-    list1 = list(list_into_chunks(data_list, number_months))
+    list1 = list(_chunks(data_list, number_months))
     # Asks the functions to average over the data
+    # print(list1)
     average_list = _average(list1)
     # Returns the data
     return average_list
