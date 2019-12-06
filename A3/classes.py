@@ -81,12 +81,16 @@ class Analysis:
         list_u = _average(list(_chunks(list_u, gra)))
         list_u2 = _average(list(_chunks(list_u2, gra)))
 
-        list_.clear()
-        for i in range(len(list_xy)):
-            tuple_ = list_xy[i] + list_u[i] + list_u2[i]
-            list_.append(tuple_)
+        self.list_tuples = list_xy
+        self.list_uncertainty1 = list_u
+        self.list_uncertainty2 = list_u2
 
-        return list_
+        # list_.clear()
+        # for i in range(len(list_xy)):
+        #     tuple_ = list_xy[i] + list_u[i] + list_u2[i]
+        #     list_.append(tuple_)
+
+        return  # list_
 
     def scatterPlot(self, one, two, color='m'):
         return
