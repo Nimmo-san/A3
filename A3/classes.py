@@ -77,15 +77,16 @@ class Analysis:
             list_u.append(list_[in2])
             list_u2.append(list_[in3])
 
-        list_xy = list(_chunks(list_xy, gra))
-        list_u = list(_chunks(list_u, gra))
-        list_u2 = list(_chunks(list_u2, gra))
+        list_xy = _average(list(_chunks(list_xy, gra)))
+        list_u = _average(list(_chunks(list_u, gra)))
+        list_u2 = _average(list(_chunks(list_u2, gra)))
 
-        list_xy = _average(list_xy)
-        list_u = _average(list_u)
-        list_u2 = _average(list_u2)
+        list_.clear()
+        for i in range(len(list_xy)):
+            tuple_ = list_xy[i] + list_u[i] + list_u2[i]
+            list_.append(tuple_)
 
-        return list_xy, list_u, list_u2
+        return list_
 
     def scatterPlot(self, one, two, color='m'):
         return

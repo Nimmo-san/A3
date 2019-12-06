@@ -72,7 +72,7 @@ ana = Analysis()
 # ana.updateLists((0, 2, 4, 6, 8, 10), 12, 'nhu', 'nhu2', 1, 6)
 
 
-ana.addFile(parent_path + '\Parsed.monthly_out.nh', 'nh')
-print(ana.updateLists((0, 1, 8, 9, 10, 11), 2, 'Hu', 'Hu2', 0, 2000))
+ana.addFile(parent_path + '\Here', 'h')
+print(ana.updateLists((0, 1, 8, 9, 10, 11), 3, 'Hu', 'Hu2', 0, 11))
 
 ana.printLists()
