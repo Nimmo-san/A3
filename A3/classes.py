@@ -39,9 +39,7 @@ class Analysis:
             lines = [line.rstrip('\n') for line in file]
             files_data = self._retrieveData(data=lines, tuple_=tuple_columns,
                                             gra=granularity, min_=min_, max_=max_)
-
             return files_data
-        return
 
     def to_tuple(self, list_):
         return [tuple(element) for element in list_]
