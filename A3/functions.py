@@ -15,7 +15,7 @@ def openFile(file_path, argument):
                 return file
             except FileNotFoundError:
                 return None
-        print("Given argument: {} is invalid".format(argument))
+        print("Given argument: {} isn't predefined!".format(argument))
     else:
         print("File {} could not be found!".format(file_path))
     return file
@@ -240,11 +240,14 @@ def correctFile(input_file, output_file):
     data = []
     full_data = []
 
+    # Requests for the parameter files to be open for reading and writing
     _readfile = openFile(input_file, 'r')
     _writefile = openFile(output_file, 'w')
+    # Checks if they exist and are opened 
     if _readfile and _writefile:
         pass
     elif _readfile and not _writefile:
+        # If not the write file is created as the inputfile must exist
         print("File, {} could't be found! \n File being created.".format(output_file))
         _writefile = open(output_file, 'w')
 
@@ -287,6 +290,8 @@ def plotWithError(name, type_s, list_tuples, list_tuples2, list_tuples3, color1=
         print("Size of list not equal: ", n, m, k)
         exit(1)
 
+    # The following for loops append the data into their corresponding list
+    # to be plotted
     for (xp, yp) in list_tuples:
         x.append(xp)
         y.append(yp)
