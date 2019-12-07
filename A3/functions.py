@@ -156,13 +156,13 @@ def _retrieve(list_):
     return list_data
 
 
-def makeList(data_full_path):
+def makeList(full_path):
     """ Makes a list of the data with the given file path, passed in as argument """
     # print(data_full_path)
     full_list = []
     argument = ' '
     # Checks if the file exists or not
-    f = openFile(data_full_path, 'r')
+    f = openFile(full_path, 'r')
     if not f:
         exit(1)
 

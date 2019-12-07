@@ -1,4 +1,6 @@
-from functions import _average, _chunks
+import matplotlib.pyplot as plt
+
+from functions import _average, _chunks, _tofloat
 
 
 class Analysis:
@@ -9,8 +11,8 @@ class Analysis:
         self.input_files = []
         self.titles = []
         self.list_tuples = []
-        self.list_uncertainty1 = []
-        self.list_uncertainty2 = []
+        self.uncer1 = []
+        self.uncer2 = []
         self.colors = {'d': 'm', 'me': 'fuchsia', 'l': 'magenta', 'vl': 'orchid'}
 
     def addFile(self, input_file, title):
@@ -24,12 +26,30 @@ class Analysis:
             print(" -> {}.txt, {}".format(self.input_files[data], self.titles[data]))
 
     def plotListTuples(self):
-        x = []
-        y = []
+        x_ = []
+        y_ = []
+        u1 = []
+        l1 = []
+        u2 = []
+        l2 = []
 
-        for (xp, yp) in self.list_tuples:
-            x.append(xp)
-            y.append(yp)
+        for (a, b, c, d, e, f) in self.list_tuples:
+            x_.append(a)
+            y_.append(b)
+            u1.append(c)
+            l1.append(d)
+            u2.append(e)
+            l2.append(f)
+
+        x_ = _tofloat(x_)
+        y_ = _tofloat(y_)
+        u1 = _tofloat(u1)
+        l1 = _tofloat(l1)
+        u2 = _tofloat(u2)
+        l2 = _tofloat(l2)
+        plt.fill_between(x_, u1, l1, color='m')
+        plt.plot(x_, y_, 'ro', markersize=2)
+        plt.show()
 
     def updateLists(self, tuple_columns, granularity=0, type_='', type_2='', min_=0, max_=0):
 
@@ -39,7 +59,10 @@ class Analysis:
             lines = [line.rstrip('\n') for line in file]
             files_data = self._retrieveData(data=lines, tuple_=tuple_columns,
                                             gra=granularity, min_=min_, max_=max_)
-            return files_data
+            self.list_tuples = files_data
+            self.uncer1.append(type_)
+            self.uncer2.append(type_2)
+            return self.plotListTuples()
 
     def to_tuple(self, list_):
         return [tuple(element) for element in list_]
@@ -50,7 +73,7 @@ class Analysis:
         list_xy = []
         list_u = []
         list_u2 = []
-        print(len(data))
+        # print(len(data))
         if min_ >= 0 and max_ <= len(data):
             for elem in range(min_, max_, 1):
                 split = data[elem].split(',')
@@ -79,16 +102,12 @@ class Analysis:
         list_u = _average(list(_chunks(list_u, gra)))
         list_u2 = _average(list(_chunks(list_u2, gra)))
 
-        self.list_tuples = list_xy
-        self.list_uncertainty1 = list_u
-        self.list_uncertainty2 = list_u2
+        list_.clear()
+        for i in range(len(list_xy)):
+            tuple_ = list_xy[i] + list_u[i] + list_u2[i]
+            list_.append(tuple_)
 
-        # list_.clear()
-        # for i in range(len(list_xy)):
-        #     tuple_ = list_xy[i] + list_u[i] + list_u2[i]
-        #     list_.append(tuple_)
-
-        return  # list_
+        return list_
 
     def scatterPlot(self, one, two, color='m'):
         return

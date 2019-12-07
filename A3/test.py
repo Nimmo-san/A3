@@ -13,6 +13,7 @@ monthly_output = '/Parsed.monthly'
 
 # The test data to be plotted
 data_file = '..\A3/textfiles\Data.nh.txt'
+# Requests for the data in the file to be appended into a list
 list_tuples = makeList(data_file)
 
 plotList('DEAD!', list_tuples, 'r', 'DEAD I', 'DEAD II')
@@ -34,12 +35,9 @@ for i in range(n - 1):
     if input_file_index > n or output_file_index > n:
         break
 
-        # print("File, I:O -> {}:{}".format(IO_monthly_files[input_file_index],
-        # IO_monthly_files[output_file_index]))
     input_file = parent_path + monthly_input + IO_monthly_files[input_file_index] + '.txt'
     output_file = parent_path + monthly_output + IO_monthly_files[output_file_index] + '.txt'
 
-    # print("INPUT:OUTPUT -->> {}:{}".format(input_file, output_file))
     success = correctFile(input_file, output_file)
 
 # makeAverageList function invoked to find the averages of the nh data over a
@@ -58,21 +56,23 @@ plt.show()
 
 # An instance of a class
 ana = Analysis()
+ana.addFile(parent_path + '\Parsed.monthly_out.ns', 'ns')
+# print(ana.updateLists((0, 1, 8, 9, 10, 11), 1, 'Hu', 'Hu2', 0, 2000))
 
 # Iterates through it and adds the output function to the input file
-# for i in range(n - 1):
-#     output_file_index = 2 * i - 1
-#     if output_file_index < 0:
-#         continue
-#     if output_file_index > n:
-#         break
+for i in range(n - 1):
+    output_file_index = 2 * i - 1
+    if output_file_index < 0:
+        continue
+    if output_file_index > n:
+        break
     # Invokes the addFile and updateLists function for each input file
-# ana.addFile(parent_path + monthly_output + IO_monthly_files[output_file_index],
-#             IO_monthly_files[output_file_index][-2:])
-# ana.updateLists((0, 2, 4, 6, 8, 10), 12, 'nhu', 'nhu2', 1, 6)
+    ana.addFile(parent_path + monthly_output + IO_monthly_files[output_file_index],
+                IO_monthly_files[output_file_index][-2:])
+    print(parent_path + monthly_output + IO_monthly_files[output_file_index])
+    ana.updateLists((0, 1, 8, 9, 10, 11), 120, 'nhu', 'nhu2', 1, 2037)
 
-
-ana.addFile(parent_path + '\Here', 'h')
-print(ana.updateLists((0, 1, 8, 9, 10, 11), 3, 'Hu', 'Hu2', 0, 11))
-
+ana.addFile(parent_path + '\Parsed.monthly_out.nh', 'nh')
+ana.updateLists((0, 1, 8, 9, 10, 11), 1, 'Hu', 'Hu2', 0, 2000)
+# plt.show()
 ana.printLists()
