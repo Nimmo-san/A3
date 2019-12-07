@@ -50,6 +50,7 @@ class Analysis:
         plt.fill_between(x_, u1, l1, color='m')
         plt.plot(x_, y_, 'ro', markersize=2)
         plt.show()
+        return
 
     def updateLists(self, tuple_columns, granularity=0, type_='', type_2='', min_=0, max_=0):
 
@@ -62,7 +63,7 @@ class Analysis:
             self.list_tuples = files_data
             self.uncer1.append(type_)
             self.uncer2.append(type_2)
-            return self.plotListTuples()
+            self.plotListTuples()
 
     def to_tuple(self, list_):
         return [tuple(element) for element in list_]
